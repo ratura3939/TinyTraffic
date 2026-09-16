@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="TinyTraffic/TinyTraffic.vcxproj" Id="cba9af76-8fb4-4693-a300-4df8a6de75f1" />
+</Solution>
