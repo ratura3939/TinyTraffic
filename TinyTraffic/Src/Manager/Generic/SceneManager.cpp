@@ -141,11 +141,6 @@ void SceneManager::Draw(void)
 	//ƒGƒtƒFƒNƒVƒA•`‰æ
 	DrawEffekseer3D();
 
-	//ƒV[ƒ“‚Ì‰º‘w‚©‚ç‡‚É•`‰æ
-	for (auto& scene : scenes_) {
-		scene->DrawUI();
-	}
-
 	// ˆÃ“]E–¾“]
 	fader_->Draw();
 
@@ -161,7 +156,6 @@ void SceneManager::Destroy(void)
 	SoundManager::GetInstance().Destroy();
 	EffectManager::GetInstance().Destroy();
 	UIManager2d::GetInstance().Destroy();
-	//CollisionManager::GetInstance().DestroyInstance();
 
 	scenes_.clear();
 
@@ -173,7 +167,6 @@ void SceneManager::Destroy(void)
 	camera_->Release();
 
 	delete instance_;
-
 }
 
 
@@ -207,7 +200,6 @@ void SceneManager::PopScene(void)
 
 float SceneManager::GetDeltaTime(void) const
 {
-	//return 1.0f / 60.0f;
 	return deltaTime_;
 }
 
@@ -287,7 +279,6 @@ void SceneManager::DoChangeScene(void)
 	auto& sndM = SoundManager::GetInstance();
 	auto& efcM = EffectManager::GetInstance();
 	auto& uiM = UIManager2d::GetInstance();
-	//auto& colM = CollisionManager::GetInstance();
 
 	//‰ð•ú
 	for (auto& scene : scenes_) {

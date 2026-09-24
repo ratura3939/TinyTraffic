@@ -27,19 +27,6 @@ public:
 		,LEFT_SUB		//左(サブ)
 		,RIGHT_SUB		//右(サブ)
 
-		,ATTACK_NORMAL	//通常攻撃
-		,ATTACK_STRONG	//強攻撃
-		,ATTACK_SPECIAL	//特殊攻撃
-		,ATTACK_ULTIMET	//必殺技
-
-		,DEBUG_ULT_REDY	//必殺技準備（デバッグ用）
-		,DEBUG_UP
-		,DEBUG_RIGHT
-		,DEBUG_LEFT
-		,DEBUG_DOWN
-		,DEBUG_FLONT
-		,DEBUG_BACK
-
 		,ENTER			//決定
 		,CANCEL			//キャンセル
 		,PAUSE			//ポーズ

@@ -3,6 +3,7 @@
 class Title :
     public SceneBase
 {
+public:
     Title(void);
 	~Title(void)override;
 
@@ -14,5 +15,8 @@ class Title :
 	void Draw(void)override;
 	void Release(void)override;
 	void Reset(void)override;
+
+private:
+
 };
 

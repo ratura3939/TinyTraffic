@@ -3,6 +3,7 @@
 class Game :
     public SceneBase
 {
+public:
 	Game(void);
 	~Game(void)override;
 
@@ -14,5 +15,8 @@ class Game :
 	void Draw(void)override;
 	void Release(void)override;
 	void Reset(void)override;
+
+private:
+
 };
 
