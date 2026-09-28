@@ -9,6 +9,7 @@ namespace {
 	const int RB_NUM = 512;
 
 	const float MOUSE_MOVE_THRESHOLD = 15.0f;	//マウス移動の閾値
+	const float MOUSE_MOVE_MAX = 100.0f;		//マウス移動の最大値
 }
 
 void InputManager::CreateInstance(void)
@@ -314,7 +315,10 @@ InputManager::MoveInput InputManager::GetMouseMoveInput(void)
 	//このフレームにおけるマウスの移動量を計算
 	VECTOR mouseVec = VGet(static_cast<float>(mousePos_.x - centerMousePos_.x), static_cast<float>(mousePos_.y - centerMousePos_.y), 0.0f);
 
+	result.x = mouseVec.x / MOUSE_MOVE_MAX;
+	result.y = mouseVec.y / MOUSE_MOVE_MAX;
 
+	result.magnitude = sqrt(result.x * result.x + result.y * result.y);
 
 	return result;
 }
@@ -367,7 +371,8 @@ InputManager::MoveInput InputManager::GetMoveInput(bool _isDistinguish)
 		result = GetPadMoveInput();
 		if (result.magnitude == 0.0f) {
 			//キーボード操作
-			result = GetKeyMoveInput();
+			//result = GetKeyMoveInput();
+			result = GetMouseMoveInput();
 		}
 	}
 	else {
@@ -378,7 +383,8 @@ InputManager::MoveInput InputManager::GetMoveInput(bool _isDistinguish)
 		}
 		//KEYのとき
 		else if (cntl == SceneManager::CNTL::KEY) {
-			result = GetKeyMoveInput();
+			//result = GetKeyMoveInput();
+			result = GetMouseMoveInput();
 		}
 	}
 

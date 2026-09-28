@@ -39,6 +39,8 @@ void Cursor::DoUpdate(void)
 {
 	InputManager& input = InputManager::GetInstance();
 
+	const auto& moveInput = input.GetMoveInput();
+
 	//上下左右の移動
 	if (input.IsPressed(InputManager::INPUT_COMMAND::UP)) {
 		movedPos_.y -= speed_;
