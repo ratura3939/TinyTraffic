@@ -9,7 +9,7 @@ namespace {
 	const int RB_NUM = 512;
 
 	const float MOUSE_MOVE_THRESHOLD = 15.0f;	//マウス移動の閾値
-	const float MOUSE_MOVE_MAX = 100.0f;		//マウス移動の最大値
+	const float MOUSE_MOVE_MAX = 30.0f;		//マウス移動の最大値
 }
 
 void InputManager::CreateInstance(void)
@@ -94,6 +94,7 @@ void InputManager::Update(void)
 	}
 
 	//マウス位置初期化
+	lastMousePos_ = mousePos_;
 	mousePos_ = centerMousePos_;
 	SetMousePoint(mousePos_.x, mousePos_.y);
 }
@@ -313,7 +314,7 @@ InputManager::MoveInput InputManager::GetMouseMoveInput(void)
 	MoveInput result = { 0.0f,0.0f,0.0f };
 
 	//このフレームにおけるマウスの移動量を計算
-	VECTOR mouseVec = VGet(static_cast<float>(mousePos_.x - centerMousePos_.x), static_cast<float>(mousePos_.y - centerMousePos_.y), 0.0f);
+	VECTOR mouseVec = VGet(fabs(static_cast<float>(lastMousePos_.x - centerMousePos_.x)), fabs(static_cast<float>(lastMousePos_.y - centerMousePos_.y)), 0.0f);
 
 	result.x = mouseVec.x / MOUSE_MOVE_MAX;
 	result.y = mouseVec.y / MOUSE_MOVE_MAX;
@@ -400,6 +401,7 @@ InputManager::InputManager(void)
 	auto& app = Application::GetInstance();
 	centerMousePos_ = { app.GetWindowWidth() / 2,app.GetWindowHeight() / 2 };
 	mousePos_ = centerMousePos_;
+	lastMousePos_ = mousePos_;
 	mouseState_ = -1;
 }
 

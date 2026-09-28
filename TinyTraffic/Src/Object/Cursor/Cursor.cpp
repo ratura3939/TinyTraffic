@@ -20,6 +20,10 @@ Cursor::~Cursor(void)
 void Cursor::Draw(void)
 {
 	DrawCircle(static_cast<int>(pos_.x), static_cast<int>(pos_.y), CURSOR_RADIUS, CURSOR_COLOR, true);
+	InputManager& input = InputManager::GetInstance();
+	const auto& moveInput = input.GetMoveInput();
+
+	DrawFormatString(50, 50, 0xffffff, L"MousePos: (%.2f, %.2f) \nInputMove: (%.2f, %.2f)", pos_.x, pos_.y, moveInput.x, moveInput.y);
 }
 
 void Cursor::Release(void)
@@ -43,15 +47,15 @@ void Cursor::DoUpdate(void)
 
 	//上下左右の移動
 	if (input.IsPressed(InputManager::INPUT_COMMAND::UP)) {
-		movedPos_.y -= speed_;
+		movedPos_.y -= speed_ * moveInput.y;
 	}
 	if (input.IsPressed(InputManager::INPUT_COMMAND::DOWN)) {
-		movedPos_.y += speed_;
+		movedPos_.y += speed_ * moveInput.y;
 	}
 	if (input.IsPressed(InputManager::INPUT_COMMAND::LEFT)) {
-		movedPos_.x -= speed_;
+		movedPos_.x -= speed_ * moveInput.x;
 	}
 	if(input.IsPressed(InputManager::INPUT_COMMAND::RIGHT)) {
-		movedPos_.x += speed_;
+		movedPos_.x += speed_ * moveInput.x;
 	}
 }

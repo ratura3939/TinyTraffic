@@ -191,7 +191,8 @@ private:
 	//マウスホイールに関して
 	int mouseState_;		//マウスの入力状態
 	Vector2 mousePos_;		//マウス位置
-	Vector2 centerMousePos_;	//マウス位置(１フレーム前)
+	Vector2 lastMousePos_;	//マウス位置(１フレ前)
+	Vector2 centerMousePos_;	//マウス位置(中央)
 
 	using MouseInputTable_t = std::unordered_map<MOUSE_INPUT, std::function<bool(void)>>;
 	MouseInputTable_t mouseInputTable_;
