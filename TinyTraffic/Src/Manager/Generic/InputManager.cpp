@@ -7,6 +7,8 @@ InputManager* InputManager::instance_ = nullptr;
 namespace {
 	const int LB_NUM = 256;
 	const int RB_NUM = 512;
+
+	const float MOUSE_MOVE_THRESHOLD = 15.0f;	//マウス移動の閾値
 }
 
 void InputManager::CreateInstance(void)
@@ -175,16 +177,16 @@ void InputManager::MouseInputFuncInit(void)
 		return mouseState_ & MOUSE_INPUT_MIDDLE;
 	};
 	mouseInputTable_[MOUSE_INPUT::UP] = [this]() {
-		return mousePos_.y < centerMousePos_.y;
+		return (mousePos_.y < centerMousePos_.y) && (abs(mousePos_.y - centerMousePos_.y) > MOUSE_MOVE_THRESHOLD);
 	};
 	mouseInputTable_[MOUSE_INPUT::DOWN] = [this]() {
-		return mousePos_.y > centerMousePos_.y;
+		return (mousePos_.y > centerMousePos_.y) && (abs(mousePos_.y - centerMousePos_.y) > MOUSE_MOVE_THRESHOLD);
 	};
 	mouseInputTable_[MOUSE_INPUT::LEFT] = [this]() {
-		return mousePos_.x < centerMousePos_.x;
+		return (mousePos_.x < centerMousePos_.x) && (abs(mousePos_.x - centerMousePos_.x) > MOUSE_MOVE_THRESHOLD);
 	};
 	mouseInputTable_[MOUSE_INPUT::RIGHT] = [this]() {
-		return mousePos_.x > centerMousePos_.x;
+		return (mousePos_.x > centerMousePos_.x) && (abs(mousePos_.x - centerMousePos_.x) > MOUSE_MOVE_THRESHOLD);
 	};
 }
 
@@ -278,16 +280,16 @@ InputManager::MoveInput InputManager::GetKeyMoveInput(void)
 
 	const float movePow = 1.0f;
 
-	if (IsPressed(INPUT_COMMAND::UP)) {
+	if (IsPressed(INPUT_COMMAND::UP_SUB)) {
 		result.y += movePow;
 	}
-	if (IsPressed(INPUT_COMMAND::DOWN)) {
+	if (IsPressed(INPUT_COMMAND::DOWN_SUB)) {
 		result.y -= movePow;
 	}
-	if (IsPressed(INPUT_COMMAND::LEFT)) {
+	if (IsPressed(INPUT_COMMAND::LEFT_SUB)) {
 		result.x -= movePow;
 	}
-	if (IsPressed(INPUT_COMMAND::RIGHT)) {
+	if (IsPressed(INPUT_COMMAND::RIGHT_SUB)) {
 		result.x += movePow;
 	}
 
@@ -302,6 +304,18 @@ InputManager::MoveInput InputManager::GetKeyMoveInput(void)
 		}
 	}
 	
+	return result;
+}
+
+InputManager::MoveInput InputManager::GetMouseMoveInput(void)
+{
+	MoveInput result = { 0.0f,0.0f,0.0f };
+
+	//このフレームにおけるマウスの移動量を計算
+	VECTOR mouseVec = VGet(static_cast<float>(mousePos_.x - centerMousePos_.x), static_cast<float>(mousePos_.y - centerMousePos_.y), 0.0f);
+
+
+
 	return result;
 }
 

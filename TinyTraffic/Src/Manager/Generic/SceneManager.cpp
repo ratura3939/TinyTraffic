@@ -1,10 +1,12 @@
 #include"../../pch.h"
 #include "../../Common/Fader.h"
+#include "../../Common/SingletonRegistry.h"
 #include "../../Application.h"
 #include "../../Scene/Main/Title.h"
 #include"../Decoration/EffectManager.h"
 #include"../Decoration/SoundManager.h"
 #include"../Decoration/UIManager2d.h"
+#include"../GameSystem/CursorManager.h"
 #include "ResourceManager.h"
 #include "Camera.h"
 #include "SceneManager.h"
@@ -33,6 +35,9 @@ void SceneManager::Init(void)
 
 	//UIマネージャの生成
 	UIManager2d::CreateInstance();
+
+	//ゲーム内カーソル
+	CursorManager::CreateInstance(SingletonRegistry::DESTROY_TIMING::ALL_END);
 
 	fader_ = new Fader();
 	fader_->Init();
@@ -112,6 +117,7 @@ void SceneManager::Update(void)
 		camera_->Update();
 		//最新のシーンだけを更新
   		scenes_.back()->Update();
+		CursorManager::GetInstance().Update();
 		SoundManager::GetInstance().Update();
 		EffectManager::GetInstance().Update();
 	}

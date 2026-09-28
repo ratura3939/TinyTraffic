@@ -6,10 +6,10 @@
 namespace {
 	const int CURSOR_RADIUS = 10;	//カーソルの半径
 	const int CURSOR_COLOR = 0xff0000;	//カーソルの色
-	const float CURSOR_SPEED = 5.0f;	//カーソルの移動速度
 }
 
-Cursor::Cursor(void)
+Cursor::Cursor(const float& _speed)
+	:speed_(_speed)
 {
 }
 
@@ -32,7 +32,7 @@ void Cursor::DoLoad(void)
 
 void Cursor::DoInit(void)
 {
-	pos_ = { Application::GetInstance().GetWindowWidth() / 2.0f, Application::GetInstance().GetWindowHeight() / 2.0f, 0.0f };
+	pos_ = Application::GetInstance().GetWindowCenterPos();
 }
 
 void Cursor::DoUpdate(void)
@@ -41,15 +41,15 @@ void Cursor::DoUpdate(void)
 
 	//上下左右の移動
 	if (input.IsPressed(InputManager::INPUT_COMMAND::UP)) {
-		movedPos_.y -= CURSOR_SPEED;
+		movedPos_.y -= speed_;
 	}
 	if (input.IsPressed(InputManager::INPUT_COMMAND::DOWN)) {
-		movedPos_.y += CURSOR_SPEED;
+		movedPos_.y += speed_;
 	}
 	if (input.IsPressed(InputManager::INPUT_COMMAND::LEFT)) {
-		movedPos_.x -= CURSOR_SPEED;
+		movedPos_.x -= speed_;
 	}
 	if(input.IsPressed(InputManager::INPUT_COMMAND::RIGHT)) {
-		movedPos_.x += CURSOR_SPEED;
+		movedPos_.x += speed_;
 	}
 }

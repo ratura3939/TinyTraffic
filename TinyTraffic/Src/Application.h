@@ -58,6 +58,9 @@ public:
 	const int GetWindowWidth(void) { return width_; }
 	const int GetWindowHeight(void) { return height_; }
 
+	//スクリーン中央位置取得
+	const VECTOR& GetWindowCenterPos(void) { return { width_ / 2.0f, height_ / 2.0f, 0.0f }; }
+
 private:
 
 	//フレーム固定用

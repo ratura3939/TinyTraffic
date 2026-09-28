@@ -156,6 +156,7 @@ private:
 	//•¡”‚ÌˆÚ“®•ûŒü“ü—Í‚ğ‰Á–¡‚·‚é
 	MoveInput GetPadMoveInput(void);
 	MoveInput GetKeyMoveInput(void);
+	MoveInput GetMouseMoveInput(void);
 
 	static InputManager* instance_;
 
