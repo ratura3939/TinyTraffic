@@ -17,6 +17,7 @@ public:
 	void Reset(void)override;
 
 private:
-
+	int boxColor_;
+	bool isStartBoxSelect_;
 };
 
