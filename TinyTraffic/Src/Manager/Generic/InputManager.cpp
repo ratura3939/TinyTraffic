@@ -9,7 +9,7 @@ namespace {
 	const int RB_NUM = 512;
 
 	const float MOUSE_MOVE_THRESHOLD = 15.0f;	//マウス移動の閾値
-	const float MOUSE_MOVE_MAX = 30.0f;		//マウス移動の最大値
+	const float MOUSE_MOVE_MAX = 20.0f;		//マウス移動の最大値
 }
 
 void InputManager::CreateInstance(void)

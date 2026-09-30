@@ -1,5 +1,9 @@
-#pragma once
+﻿#pragma once
+#include<memory>
 #include "../SceneBase.h"
+
+class SelectBox;
+
 class Title :
     public SceneBase
 {
@@ -17,7 +21,7 @@ public:
 	void Reset(void)override;
 
 private:
-	int boxColor_;
-	bool isStartBoxSelect_;
+	std::unique_ptr<SelectBox> startBox_;	//スタートボックス
+	std::unique_ptr<SelectBox> exitBox_;	//終了ボックス
 };
 
