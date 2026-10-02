@@ -55,6 +55,10 @@ void ResourceManager::InitTitle(void)
 void ResourceManager::InitGame(void)
 {
 	Resource res;
+
+	//テストマップ１
+	res = Resource(Resource::TYPE::IMG, Application::PATH_IMAGE + L"Map/TestMap1.png");
+	resourcesMap_.emplace(SRC::TEST_MAP_1_IMG, res);
 }
 
 void ResourceManager::InitClear(void)

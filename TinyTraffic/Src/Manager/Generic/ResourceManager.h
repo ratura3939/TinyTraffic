@@ -10,7 +10,8 @@ public:
 	// リソース名
 	enum class SRC
 	{
-		MAX
+		TEST_MAP_1_IMG
+		,MAX
 	};
 
 	// 明示的にインステンスを生成する

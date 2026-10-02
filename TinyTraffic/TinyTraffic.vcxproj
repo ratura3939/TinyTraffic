@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Src\Object\Map\Map.cpp" />
     <ClCompile Include="Src\Object\SelectBox.cpp" />
     <ClCompile Include="Src\Manager\GameSystem\CursorManager.cpp" />
     <ClCompile Include="Src\Object\Cursor\Cursor.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="Src\Scene\Main\Title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\Object\Map\Map.h" />
     <ClInclude Include="Src\Object\SelectBox.h" />
     <ClInclude Include="Src\Manager\GameSystem\CursorManager.h" />
     <ClInclude Include="Src\Object\Cursor\Cursor.h" />
