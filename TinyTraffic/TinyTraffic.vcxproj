@@ -171,6 +171,7 @@
     <ClCompile Include="Src\Scene\SceneBase.cpp" />
     <ClCompile Include="Src\Utility\Utility.cpp" />
     <ClCompile Include="Src\Scene\Main\Title.cpp" />
+    <ClCompile Include="Src\Object\Map\Tile\TileBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Object\Map\Map.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Src\Scene\SceneBase.h" />
     <ClInclude Include="Src\Utility\Utility.h" />
     <ClInclude Include="Src\Scene\Main\Title.h" />
+    <ClInclude Include="Src\Object\Map\Tile\TileBase.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Shader\Common\Pixel\PixelShader2DHeader.hlsli" />
