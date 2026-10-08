@@ -171,10 +171,13 @@
     <ClCompile Include="Src\Scene\SceneBase.cpp" />
     <ClCompile Include="Src\Utility\Utility.cpp" />
     <ClCompile Include="Src\Scene\Main\Title.cpp" />
-    <ClCompile Include="Src\Object\Map\Tile\TileBase.cpp" />
+    <ClCompile Include="Src\Object\Map\Tile\Tile.cpp" />
+    <ClCompile Include="Src\Object\Map\Tile\TileState.cpp" />
+    <ClCompile Include="Src\Manager\GameSystem\TileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Object\Map\Map.h" />
+    <ClInclude Include="Src\Object\Map\Tile\TileType.h" />
     <ClInclude Include="Src\Object\SelectBox.h" />
     <ClInclude Include="Src\Manager\GameSystem\CursorManager.h" />
     <ClInclude Include="Src\Object\Cursor\Cursor.h" />
@@ -205,7 +208,9 @@
     <ClInclude Include="Src\Scene\SceneBase.h" />
     <ClInclude Include="Src\Utility\Utility.h" />
     <ClInclude Include="Src\Scene\Main\Title.h" />
-    <ClInclude Include="Src\Object\Map\Tile\TileBase.h" />
+    <ClInclude Include="Src\Object\Map\Tile\Tile.h" />
+    <ClInclude Include="Src\Object\Map\Tile\TileState.h" />
+    <ClInclude Include="Src\Manager\GameSystem\TileManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Shader\Common\Pixel\PixelShader2DHeader.hlsli" />
