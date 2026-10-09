@@ -1,4 +1,4 @@
-#include"../../pch.h"
+ï»¿#include"../../pch.h"
 #include "../../Application.h"
 #include "../../Utility/Utility.h"
 #include "SceneManager.h"
@@ -6,14 +6,14 @@
 #include "Camera.h"
 
 namespace {
-	const float LERP_SPEED = 0.1f;			//•âŠ®‘¬“x
-	const float LERP_MAX = 1.0f;			//•âŠ®Š®—¹
-	const float HALF_DISTANCE = 0.5f;		//”¼•ª
-	const float WALL_LERP_SPEED = 1.0f;		//•Ç‚É‚Í•âŠ®‚Í•K—v‚È‚¢
-	const float ALLOW_NO_KERP_DIFF = 10.0f;	//•âŠ®‚ª•K—v‚È‚¢‚ÆŠ´‚¶‚é‹——£
+	const float LERP_SPEED = 0.1f;			//è£œå®Œé€Ÿåº¦
+	const float LERP_MAX = 1.0f;			//è£œå®Œå®Œäº†
+	const float HALF_DISTANCE = 0.5f;		//åŠåˆ†
+	const float WALL_LERP_SPEED = 1.0f;		//å£ã«ã¯è£œå®Œã¯å¿…è¦ãªã„
+	const float ALLOW_NO_KERP_DIFF = 10.0f;	//è£œå®ŒãŒå¿…è¦ãªã„ã¨æ„Ÿã˜ã‚‹è·é›¢
 
-	const float LERP_STEP_FOUCUS_RESET = 0.8f;	//ƒJƒƒ‰ƒŠƒZƒbƒg‚Ì•âŠ®ƒXƒs[ƒh
-	const float LERP_STEP_AUTOMOVE = 0.1f;		//ƒJƒƒ‰©“®ˆÚ“®‚Ì•âŠ®ƒXƒs[ƒh;
+	const float LERP_STEP_FOUCUS_RESET = 0.8f;	//ã‚«ãƒ¡ãƒ©ãƒªã‚»ãƒƒãƒˆæ™‚ã®è£œå®Œã‚¹ãƒ”ãƒ¼ãƒ‰
+	const float LERP_STEP_AUTOMOVE = 0.1f;		//ã‚«ãƒ¡ãƒ©è‡ªå‹•ç§»å‹•æ™‚ã®è£œå®Œã‚¹ãƒ”ãƒ¼ãƒ‰;
 }
 
 Camera::Camera(void)
@@ -58,7 +58,7 @@ Camera::~Camera(void)
 
 void Camera::Init(void)
 {
-	//ƒJƒƒ‰‚Ì‰Šúİ’è
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸè¨­å®š
 	SetDefault();
 	collider_ = std::make_unique<CameraCollider>(*this);
 	collider_->Init();
@@ -75,7 +75,7 @@ void Camera::Update(void)
 
 void Camera::SetBeforeDraw(void)
 {
-	//ƒNƒŠƒbƒv‹——£‚ğİ’è‚·‚é(SetDrawScreen‚ÅƒŠƒZƒbƒg‚³‚ê‚é)
+	//ã‚¯ãƒªãƒƒãƒ—è·é›¢ã‚’è¨­å®šã™ã‚‹(SetDrawScreenã§ãƒªã‚»ãƒƒãƒˆã•ã‚Œã‚‹)
 	SetCameraNearFar(CAMERA_NEAR, CAMERA_FAR);
 
 	lerpStep_ += LERP_SPEED;
@@ -114,20 +114,20 @@ void Camera::SetBeforeDraw(void)
 		break;
 	}
 
-	// FOLLOWELOCKONENONE‚ÉƒŒƒCƒLƒƒƒXƒg‚É‚æ‚éƒJƒƒ‰ˆÊ’u•â³‚ğ“K—p
+	// FOLLOWãƒ»LOCKONãƒ»NONEæ™‚ã«ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆã«ã‚ˆã‚‹ã‚«ãƒ¡ãƒ©ä½ç½®è£œæ­£ã‚’é©ç”¨
 	if (mode_ == MODE::FOLLOW || mode_ == MODE::LOCKON || mode_ == MODE::NONE) {
 		collider_->UpdateRayCast();
 		pos_ = Utility::Lerp(pos_, adjustedPos_, WALL_LERP_SPEED);
 	}
 
-	//ƒJƒƒ‰‚Ìİ’è(ˆÊ’u‚Æ’‹“_‚É‚æ‚é§Œä)
+	//ã‚«ãƒ¡ãƒ©ã®è¨­å®š(ä½ç½®ã¨æ³¨è¦–ç‚¹ã«ã‚ˆã‚‹åˆ¶å¾¡)
 	SetCameraPositionAndTargetAndUpVec(
 		pos_, 
 		focusPos_,
 		cameraUp_
 	);
 
-	// DXƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒJƒƒ‰‚ÆEffekseer‚ÌƒJƒƒ‰‚ğ“¯Šú‚·‚éB
+	// DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ã‚«ãƒ¡ãƒ©ã¨Effekseerã®ã‚«ãƒ¡ãƒ©ã‚’åŒæœŸã™ã‚‹ã€‚
 	Effekseer_Sync3DSetting();
 
 	c2fRelative_ = VSub(followObject_.pos, pos_);
@@ -135,7 +135,7 @@ void Camera::SetBeforeDraw(void)
 
 void Camera::SetBeforeDrawFixedPoint(void)
 {
-	//‰½‚à‚µ‚È‚¢
+	//ä½•ã‚‚ã—ãªã„
 }
 
 void Camera::SetBeforeDrawFree(void)
@@ -145,10 +145,10 @@ void Camera::SetBeforeDrawFree(void)
 void Camera::SetBeforeDrawFollow(void)
 {
 
-	//’Ç]‘ÎÛ‚ÌˆÊ’u
+	//è¿½å¾“å¯¾è±¡ã®ä½ç½®
 	VECTOR followPos = followObject_.pos;
 
-	//’Ç]‘ÎÛ‚ÌŒü‚«
+	//è¿½å¾“å¯¾è±¡ã®å‘ã
 	Quaternion followRot = followObject_.quaRot;
 
 	//auto& ins = InputManager::GetInstance();
@@ -157,10 +157,10 @@ void Camera::SetBeforeDrawFollow(void)
 	//	return;
 	//}
 
-	//’Ç]‘ÎÛ‚Ü‚Å‚Ì‹——£ƒxƒNƒgƒ‹‚ğ‰ñ“]‚³‚¹‘Š‘ÎÀ•W‚ğ¶¬
+	//è¿½å¾“å¯¾è±¡ã¾ã§ã®è·é›¢ãƒ™ã‚¯ãƒˆãƒ«ã‚’å›è»¢ã•ã›ç›¸å¯¾åº§æ¨™ã‚’ç”Ÿæˆ
 	VECTOR relativeCPos = rot_.PosAxis(RELATIVE_F2C_POS_FOLLOW);
 
-	//ƒJƒƒ‰ˆÊ’u‚ÌXV(’Ç]‘ÎÛˆÊ’u‚©‚ç‘Š‘ÎÀ•W‚ğ‘«‚·)
+	//ã‚«ãƒ¡ãƒ©ä½ç½®ã®æ›´æ–°(è¿½å¾“å¯¾è±¡ä½ç½®ã‹ã‚‰ç›¸å¯¾åº§æ¨™ã‚’è¶³ã™)
 	VECTOR gPos = VAdd(followPos, relativeCPos);
 
 	if (fabs(Utility::MagnitudeF(gPos) - Utility::MagnitudeF(pos_)) <= ALLOW_NO_KERP_DIFF) {
@@ -168,13 +168,13 @@ void Camera::SetBeforeDrawFollow(void)
 	}
 	idealPos_ = gPos;
 
-	//’‹“_‚Ü‚Å‚Ì‹——£ƒxƒNƒgƒ‹‚ğ‰ñ“]‚³‚¹‘Š‘ÎÀ•W‚ğ¶¬
+	//æ³¨è¦–ç‚¹ã¾ã§ã®è·é›¢ãƒ™ã‚¯ãƒˆãƒ«ã‚’å›è»¢ã•ã›ç›¸å¯¾åº§æ¨™ã‚’ç”Ÿæˆ
 	VECTOR relativeTPos = rot_.PosAxis(RELATIVE_C2T_POS);
 
-	//’‹“_‚ÌXV
+	//æ³¨è¦–ç‚¹ã®æ›´æ–°
 	focusPos_ = VAdd(followPos, relativeTPos);
 
-	//ƒJƒƒ‰‚Ìã•ûŒü
+	//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	cameraUp_ = rot_.GetUp();
 
 }
@@ -183,29 +183,29 @@ void Camera::SetBeforeDrawLockOn(void)
 {
 	Rotation();
 
-	//’Ç]‘ÎÛ‚ÌˆÊ’u
+	//è¿½å¾“å¯¾è±¡ã®ä½ç½®
 	VECTOR followPos = followObject_.pos;
-	//’Ç]‘ÎÛ‚ÌŒü‚«
+	//è¿½å¾“å¯¾è±¡ã®å‘ã
 	Quaternion followRot = followObject_.quaRot;
 
-	//ƒƒbƒNƒIƒ“‘ÎÛ‚Æ’Ç]‘ÎÛ‚Ì—£‚ê‚Ä‚¢‚é‹——£
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³å¯¾è±¡ã¨è¿½å¾“å¯¾è±¡ã®é›¢ã‚Œã¦ã„ã‚‹è·é›¢
 	VECTOR distance = VSub(lockPos_, followPos);
 
-	//—£‚ê‚é‹——£‚ğ”’l‰»
+	//é›¢ã‚Œã‚‹è·é›¢ã‚’æ•°å€¤åŒ–
 	float disMag = Utility::MagnitudeF(distance);
-	//Å’áŒÀ‚Ì’l‚ğ‰º‰ñ‚Á‚Ä‚¢‚½‚ç
+	//æœ€ä½é™ã®å€¤ã‚’ä¸‹å›ã£ã¦ã„ãŸã‚‰
 	if (disMag <= lockOnDistanceMin_) {
-		//Å’áŒÀ‚Ì’l‚ğ“ü‚ê‚é
+		//æœ€ä½é™ã®å€¤ã‚’å…¥ã‚Œã‚‹
 		disMag = lockOnDistanceMin_;
 	}
 
-	//ƒJƒƒ‰ˆÊ’u’²®(ƒJƒƒ‰‚ÍŒã•ûˆÊ’u‚ÉBY•ûŒü‚Í‹——£‚É‰‚¶‚Ä‚‚³‚ğ•Ï‚¦‚éB)
+	//ã‚«ãƒ¡ãƒ©ä½ç½®èª¿æ•´(ã‚«ãƒ¡ãƒ©ã¯å¾Œæ–¹ä½ç½®ã«ã€‚Yæ–¹å‘ã¯è·é›¢ã«å¿œã˜ã¦é«˜ã•ã‚’å¤‰ãˆã‚‹ã€‚)
 	VECTOR relative = { 0.0f,disMag * ROCK_MAGNIFICATION_Y,-disMag };
-	//ƒJƒƒ‰‚Ì‰ñ“]î•ñ‚ğ‚à‚Æ‚É‘Š‘ÎÀ•W‚ğ‰ñ“]‚³‚¹‚é
+	//ã‚«ãƒ¡ãƒ©ã®å›è»¢æƒ…å ±ã‚’ã‚‚ã¨ã«ç›¸å¯¾åº§æ¨™ã‚’å›è»¢ã•ã›ã‚‹
 	VECTOR relativeCPos = rot_.PosAxis(relative);
 
-	//‰“®‚Ì‚İ‚É”­“®‚·‚é
-	//ƒJƒƒ‰‚Ì‰ŠúƒS[ƒ‹‚ğŒvZŒ‹‰Ê‚ÅZo‚µ‚½êŠ‚É‚·‚é
+	//åˆå‹•æ™‚ã®ã¿ã«ç™ºå‹•ã™ã‚‹
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸã‚´ãƒ¼ãƒ«ã‚’è¨ˆç®—çµæœã§ç®—å‡ºã—ãŸå ´æ‰€ã«ã™ã‚‹
 	if (!isReset_) {
 		ChangeMode(MODE::RESET);
 		goal_.pos = VAdd(followObject_.pos, followObject_.quaRot.PosAxis(relative));
@@ -213,29 +213,29 @@ void Camera::SetBeforeDrawLockOn(void)
 		return;
 	}
 
-	//’‹“_‚ÌXV
-	//ƒƒbƒNƒIƒ“’†‚Ì’‹“_‚Í’Ç]‘ÎÛ‚ÆƒƒbƒNƒIƒ“‘ÎÛ‚Ì’†ŠÔ’n“_‚É‚ ‚éB
+	//æ³¨è¦–ç‚¹ã®æ›´æ–°
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³ä¸­ã®æ³¨è¦–ç‚¹ã¯è¿½å¾“å¯¾è±¡ã¨ãƒ­ãƒƒã‚¯ã‚ªãƒ³å¯¾è±¡ã®ä¸­é–“åœ°ç‚¹ã«ã‚ã‚‹ã€‚
 	goalFocusPos_ = VAdd(followPos, VScale(distance, HALF_DISTANCE));
 	focusPos_ = Utility::Lerp(focusPos_, goalFocusPos_, lerpStep_);
 
-	//ƒJƒƒ‰ˆÊ’u‚ÌXV
+	//ã‚«ãƒ¡ãƒ©ä½ç½®ã®æ›´æ–°
 	prevGoalPos_ = lockOnGoalPos_;
 	lockOnGoalPos_ = VAdd(focusPos_, relativeCPos);
 
 	//pos_ = Utility::Lerp(pos_, lockOnGoalPos_, lerpStep_);
 	idealPos_ = lockOnGoalPos_;
 
-	//‚ ‚é’ö“x‚Ì‚‚³‚Í•Û‚Â
+	//ã‚ã‚‹ç¨‹åº¦ã®é«˜ã•ã¯ä¿ã¤
 	if (pos_.y < UNDER_LIMIT_Y)pos_.y = UNDER_LIMIT_Y;
 	if (pos_.y > HIGHT_LIMIT_Y)pos_.y = HIGHT_LIMIT_Y;
 
-	//ƒJƒƒ‰‚Ìã•ûŒü
+	//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	cameraUp_ = rot_.GetUp();
 }
 
 void Camera::SetBeforeDrawShake(void)
 {
-	// ˆê’èŠÔƒJƒƒ‰‚ğ—h‚ç‚·
+	// ä¸€å®šæ™‚é–“ã‚«ãƒ¡ãƒ©ã‚’æºã‚‰ã™
 	//stepShake_ -= SceneManager::GetInstance().GetDeltaTime();
 
 	stepShake_ -= 0.01f;
@@ -248,10 +248,10 @@ void Camera::SetBeforeDrawShake(void)
 		return;
 	}
 
-	// -1.0f`1.0f
+	// -1.0fï½1.0f
 	float f = sinf(stepShake_ * SPEED_SHAKE);
 
-	// -1000.0f`1000.0f
+	// -1000.0fï½1000.0f
 	f *= 1000.0f;
 
 	// -1000 or 1000
@@ -266,10 +266,10 @@ void Camera::SetBeforeDrawShake(void)
 	// -1 or 1
 	shake -= 1;
 
-	// ˆÚ“®—Ê
+	// ç§»å‹•é‡
 	VECTOR velocity = VScale(shakeDir_, (float)(shake)*WIDTH_SHAKE);
 
-	// ˆÚ“®æÀ•W
+	// ç§»å‹•å…ˆåº§æ¨™
 	 pos_ = VAdd(defaultPos_, velocity);
 }
 
@@ -292,30 +292,30 @@ void Camera::SetBeforeDrawReset(void)
 		return;
 	}
 
-	// ‹…–Ê•âŠÔ
+	// çƒé¢è£œé–“
 	rot_ = Quaternion::Slerp(start_.quaRot, goal_.quaRot, stepReset_);
 	pos_ = VAdd(followObject_.pos, rot_.PosAxis(RELATIVE_F2C_POS_FOLLOW));
 
-	// ’‹“_‚ğ’Ç]‘ÎÛ‚É’Ç]‚³‚¹‚éi–ˆƒtƒŒ[ƒ€XVj
+	// æ³¨è¦–ç‚¹ã‚’è¿½å¾“å¯¾è±¡ã«è¿½å¾“ã•ã›ã‚‹ï¼ˆæ¯ãƒ•ãƒ¬ãƒ¼ãƒ æ›´æ–°ï¼‰
 	goalFocusPos_ = followObject_.pos;
 	focusPos_ = Utility::Lerp(focusPos_, goalFocusPos_, LERP_STEP_FOUCUS_RESET);
 
-	// angle‚Ì‹tZ
+	// angleã®é€†ç®—
 	VECTOR currentEuler = rot_.ToEuler();
 	angles_.x = currentEuler.x;
 	angles_.y = currentEuler.y;
 
-	// ƒJƒƒ‰‚Ìã•ûŒü
+	// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	cameraUp_ = rot_.GetUp();
 }
 
 void Camera::SetBeforeDrawAutoMove(void)
 {
-	//–Ú•WˆÊ’u‚Ü‚ÅˆÚ“®‚·‚é
-	//I—¹‚Ì”»’è‚ÍŒÄ‚Ño‚µ‚½‘¤‚Ås‚¤
+	//ç›®æ¨™ä½ç½®ã¾ã§ç§»å‹•ã™ã‚‹
+	//çµ‚äº†ã®åˆ¤å®šã¯å‘¼ã³å‡ºã—ãŸå´ã§è¡Œã†
 	pos_ = Utility::Lerp(pos_, goalDirecPos_, LERP_STEP_AUTOMOVE);
 
-	//ƒJƒƒ‰‚Ìã•ûŒü
+	//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	cameraUp_ = rot_.GetUp();
 }
 
@@ -365,19 +365,19 @@ const VECTOR& Camera::GetCameraRayNormalised(void) const
 void Camera::ChangeMode(MODE mode)
 {
 
-	//ƒJƒƒ‰‚Ì‰Šúİ’è
-	//ƒJƒƒ‰‚ğ—h‚ç‚·‘O‚ÌˆÊ’u‚Å—h‚ê‚é‚æ‚¤‚É‚µ‚½‚¢‚½‚ßŠO‚µ‚Ä‚¢‚é
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸè¨­å®š
+	//ã‚«ãƒ¡ãƒ©ã‚’æºã‚‰ã™å‰ã®ä½ç½®ã§æºã‚Œã‚‹ã‚ˆã†ã«ã—ãŸã„ãŸã‚å¤–ã—ã¦ã„ã‚‹
 	//SetDefault();
 	
 	if (mode == MODE::RESET)currentMode_ = mode_;
 
-	//ƒJƒƒ‰ƒ‚[ƒh‚Ì•ÏX
+	//ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
   	mode_ = mode;
 
 	isReset_ = false;
 	lerpStep_ = 0.0f;
 
-	//•ÏX‚Ì‰Šú‰»ˆ—
+	//å¤‰æ›´æ™‚ã®åˆæœŸåŒ–å‡¦ç†
 	switch (mode_)
 	{
 	case MODE::FIXED_POINT:
@@ -404,23 +404,23 @@ void Camera::ChangeMode(MODE mode)
 		start_.quaRot = rot_;
 		goalFocusPos_ = followObject_.pos;
 
-		//Œ»İ‚ÌƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«‚©‚ç Y²‰ñ“]iƒˆ[j‚Ì‚İ‚ğ’Šo
+		//ç¾åœ¨ã®ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®å‘ãã‹ã‚‰ Yè»¸å›è»¢ï¼ˆãƒ¨ãƒ¼ï¼‰ã®ã¿ã‚’æŠ½å‡º
 		float charaYaw;
 		VECTOR axisY = { 0.0f, 1.0f, 0.0f };
 		followObject_.quaRot.ToAngleAxis(&charaYaw, &axisY);
 
-		//Œ»İ‚ÌƒJƒƒ‰‚Ì‚‚³(angles_.x)‚ÆuƒLƒƒƒ‰‚ÌŒü‚«(charaYaw)v‚ğ‡¬
+		//ç¾åœ¨ã®ã‚«ãƒ¡ãƒ©ã®é«˜ã•(angles_.x)ã¨ã€Œã‚­ãƒ£ãƒ©ã®å‘ã(charaYaw)ã€ã‚’åˆæˆ
 		Quaternion goalRotY = Quaternion::AngleAxis(charaYaw, Utility::AXIS_Y);
 		Quaternion goalRotX = Quaternion::AngleAxis(angles_.x, Utility::AXIS_X);
 
-		//…•½‰ñ“]‚ğæ‚É“K‰‚µA‚»‚ÌŒã‚ÉŒ»İ‚Ì‚‚³‚ğ“K‰
+		//æ°´å¹³å›è»¢ã‚’å…ˆã«é©å¿œã—ã€ãã®å¾Œã«ç¾åœ¨ã®é«˜ã•ã‚’é©å¿œ
 		goal_.quaRot = goalRotY.Mult(goalRotX);
 
 		VECTOR goalRelative = RELATIVE_F2C_POS_FOLLOW;
 		goalRelative.y = pos_.y;
 		goal_.pos = VAdd(followObject_.pos, goal_.quaRot.PosAxis(goalRelative));
 
-		//‰ñ“]‚Ì“¯Šú
+		//å›è»¢ã®åŒæœŸ
 		VECTOR currentEuler = rot_.ToEuler();
 		angles_.x = currentEuler.x;
 		angles_.y = currentEuler.y;
@@ -509,13 +509,13 @@ void Camera::CameraSettingShadow(void)
 	constexpr float S_FAR = 10050.0f;
 	constexpr float TARGET_LIMIT_Y = 0.0f;
 
-	//ƒJƒƒ‰ƒ^ƒCƒv‚ğ³Ë‰e‚É
+	//ã‚«ãƒ¡ãƒ©ã‚¿ã‚¤ãƒ—ã‚’æ­£å°„å½±ã«
 	SetupCamera_Ortho(SIZE);
 
-	//•`‰æ‚·‚é‰œs‚«”ÍˆÍ‚ğİ’è
+	//æç”»ã™ã‚‹å¥¥è¡Œãç¯„å›²ã‚’è¨­å®š
 	SetCameraNearFar(S_NEAR, S_FAR);
 
-	//’‹“_‚Ì§ŒÀ
+	//æ³¨è¦–ç‚¹ã®åˆ¶é™
 	VECTOR targetPos = focusPos_;
 	if (targetPos.y > TARGET_LIMIT_Y) targetPos.y = TARGET_LIMIT_Y;
 
@@ -548,23 +548,23 @@ void Camera::CameraSettingShadow(void)
 	//	targetPos.z -= 1000.0f;
 	//}
 
-	//ƒJƒƒ‰‚Ì‹“_A’‹“_‚Ìİ’è
+	//ã‚«ãƒ¡ãƒ©ã®è¦–ç‚¹ã€æ³¨è¦–ç‚¹ã®è¨­å®š
 	SetCameraPositionAndTarget_UpVecY(pos_, targetPos);
 }
 
 void Camera::SetDefault(void)
 {
-	//ƒJƒƒ‰‚Ì‰Šúİ’è
+	//ã‚«ãƒ¡ãƒ©ã®åˆæœŸè¨­å®š
 	pos_ = DEFAULT_CAMERA_POS;
 
-	//’‹“_
+	//æ³¨è¦–ç‚¹
 	focusPos_ = VAdd(pos_, RELATIVE_C2T_POS);
 
-	//ƒJƒƒ‰‚Ìã•ûŒü
+	//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	cameraUp_ = { 0.0f, 1.0f, 0.0f };
 
-	//ƒJƒƒ‰‚ÍX²‚ÉŒX‚¢‚Ä‚¢‚é‚ªA
-	//‚±‚ÌŒX‚¢‚½ó‘Ô‚ğŠp“xƒ[ƒAŒX‚«–³‚µ‚Æ‚·‚é
+	//ã‚«ãƒ¡ãƒ©ã¯Xè»¸ã«å‚¾ã„ã¦ã„ã‚‹ãŒã€
+	//ã“ã®å‚¾ã„ãŸçŠ¶æ…‹ã‚’è§’åº¦ã‚¼ãƒ­ã€å‚¾ãç„¡ã—ã¨ã™ã‚‹
 	rot_ = Quaternion::Identity();
 
 	angles_.x = Utility::Deg2RadF(0.0f);
@@ -599,15 +599,15 @@ void Camera::Rotation(void)
 		angles_.y += rotSpeed_.y;
 	}
 
-	//ƒJƒƒ‰À•W‚ğ’†S‚Æ‚µ‚ÄA’‹“_‚ğ‰ñ“]‚³‚¹‚é
+	//ã‚«ãƒ¡ãƒ©åº§æ¨™ã‚’ä¸­å¿ƒã¨ã—ã¦ã€æ³¨è¦–ç‚¹ã‚’å›è»¢ã•ã›ã‚‹
 	if (!Utility::EqualsVZero(angles_))
 	{
-		// ³–Ê‚©‚çİ’è‚³‚ê‚½Y²•ªA‰ñ“]‚³‚¹‚é
+		// æ­£é¢ã‹ã‚‰è¨­å®šã•ã‚ŒãŸYè»¸åˆ†ã€å›è»¢ã•ã›ã‚‹
 		rotOutX_ = Quaternion::AngleAxis(angles_.y, Utility::AXIS_Y);
 
-		// ³–Ê‚©‚çİ’è‚³‚ê‚½X²•ªA‰ñ“]‚³‚¹‚é
+		// æ­£é¢ã‹ã‚‰è¨­å®šã•ã‚ŒãŸXè»¸åˆ†ã€å›è»¢ã•ã›ã‚‹
 		rot_ = rotOutX_.Mult(Quaternion::AngleAxis(angles_.x, Utility::AXIS_X));
-		// ƒJƒƒ‰‚Ìã•ûŒü
+		// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 		cameraUp_ = rot_.GetUp();
 	}
 }

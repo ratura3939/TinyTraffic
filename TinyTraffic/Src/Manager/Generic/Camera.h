@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <DxLib.h>
 #include <cmath>
 #include <DirectXMath.h>
@@ -11,69 +11,69 @@ class Transform;
 class Camera
 {
 public:
-	//ƒJƒƒ‰‚Ì•`‰æˆæ(Near,Far)ŠÖ˜A‚Ì’è”------------------------------------------------------
-	static constexpr float SPEED = 15.0f;			//ƒJƒƒ‰ƒXƒs[ƒh
+	//ã‚«ãƒ¡ãƒ©ã®æç”»åŸŸ(Near,Far)é–¢é€£ã®å®šæ•°------------------------------------------------------
+	static constexpr float SPEED = 15.0f;			//ã‚«ãƒ¡ãƒ©ã‚¹ãƒ”ãƒ¼ãƒ‰
 
-	static constexpr float CAMERA_NEAR = 40.0f;		//ƒJƒƒ‰ƒNƒŠƒbƒvFNEAR
+	static constexpr float CAMERA_NEAR = 40.0f;		//ã‚«ãƒ¡ãƒ©ã‚¯ãƒªãƒƒãƒ—ï¼šNEAR
 
-	static constexpr float CAMERA_FAR = 19000.0f;	//ƒJƒƒ‰ƒNƒŠƒbƒvFFAR
+	static constexpr float CAMERA_FAR = 19000.0f;	//ã‚«ãƒ¡ãƒ©ã‚¯ãƒªãƒƒãƒ—ï¼šFAR
 
-	//ƒJƒƒ‰À•WŠÖ˜A‚Ì’è”---------------------------------------------------------------------
+	//ã‚«ãƒ¡ãƒ©åº§æ¨™é–¢é€£ã®å®šæ•°---------------------------------------------------------------------
 	
-	static constexpr VECTOR DEFAULT_CAMERA_POS = { 0.0f, 700.0f, -700.0f };			//ƒJƒƒ‰‚Ì‰ŠúÀ•W
+	static constexpr VECTOR DEFAULT_CAMERA_POS = { 0.0f, 700.0f, -700.0f };			//ã‚«ãƒ¡ãƒ©ã®åˆæœŸåº§æ¨™
 
-	static constexpr VECTOR RELATIVE_C2T_POS = { 0.0f, -300.0f, 500.0f };			//ƒJƒƒ‰ˆÊ’u‚©‚ç’‹“_‚Ü‚Å‚Ì‘Š‘ÎÀ•W
+	static constexpr VECTOR RELATIVE_C2T_POS = { 0.0f, -300.0f, 500.0f };			//ã‚«ãƒ¡ãƒ©ä½ç½®ã‹ã‚‰æ³¨è¦–ç‚¹ã¾ã§ã®ç›¸å¯¾åº§æ¨™
 
 	
-	static constexpr VECTOR RELATIVE_F2C_POS_FOLLOW = { 0.0f, 300.0f, -500.0f };	//’Ç]‘ÎÛ‚©‚çƒJƒƒ‰ˆÊ’u‚Ü‚Å‚Ì‘Š‘ÎÀ•W(Š®‘S’Ç])
+	static constexpr VECTOR RELATIVE_F2C_POS_FOLLOW = { 0.0f, 300.0f, -500.0f };	//è¿½å¾“å¯¾è±¡ã‹ã‚‰ã‚«ãƒ¡ãƒ©ä½ç½®ã¾ã§ã®ç›¸å¯¾åº§æ¨™(å®Œå…¨è¿½å¾“)
 
-	//static constexpr VECTOR RELATIVE_F2C_POS_SPRING = { 0.0f, 40.0f, 150.0f };	//’Ç]‘ÎÛ‚©‚çƒJƒƒ‰ˆÊ’u‚Ü‚Å‚Ì‘Š‘ÎÀ•W(‚Î‚Ë•t‚«)
+	//static constexpr VECTOR RELATIVE_F2C_POS_SPRING = { 0.0f, 40.0f, 150.0f };	//è¿½å¾“å¯¾è±¡ã‹ã‚‰ã‚«ãƒ¡ãƒ©ä½ç½®ã¾ã§ã®ç›¸å¯¾åº§æ¨™(ã°ã­ä»˜ã)
 
-	static constexpr float ROCK_DISTANCE_MIN = 500.0f;		//ƒƒbƒNƒIƒ“‚ÉÅ’áŒÀ—£‚ê‚Ä‚¨‚­‹——£
+	static constexpr float ROCK_DISTANCE_MIN = 500.0f;		//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ™‚ã«æœ€ä½é™é›¢ã‚Œã¦ãŠãè·é›¢
 
-	static constexpr float ROCK_MAGNIFICATION_Y = 0.25f;	//ƒƒbƒNƒIƒ“‚ÌYÀ•W’²®—p‚Ì”{—¦
+	static constexpr float ROCK_MAGNIFICATION_Y = 0.25f;	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ™‚ã®Yåº§æ¨™èª¿æ•´ç”¨ã®å€ç‡
 	
-	//ƒJƒƒ‰ˆÚ“®ŠÖ˜A‚Ì’è”---------------------------------------------------------------------
+	//ã‚«ãƒ¡ãƒ©ç§»å‹•é–¢é€£ã®å®šæ•°---------------------------------------------------------------------
 	
-	static constexpr float MAX_MOVE_SPEED = 5.0f;		//ˆÚ“®‘¬“x‚ÌÅ‘å’l
-	static constexpr float MAX_ROT_SPEED_X = 0.025f;	//X²‰ñ“]‘¬“x‚ÌÅ‘å’l
-	static constexpr float MAX_ROT_SPEED_Y = 0.06f;	//Y²‰ñ“]‘¬“x‚ÌÅ‘å’l
+	static constexpr float MAX_MOVE_SPEED = 5.0f;		//ç§»å‹•é€Ÿåº¦ã®æœ€å¤§å€¤
+	static constexpr float MAX_ROT_SPEED_X = 0.025f;	//Xè»¸å›è»¢é€Ÿåº¦ã®æœ€å¤§å€¤
+	static constexpr float MAX_ROT_SPEED_Y = 0.06f;	//Yè»¸å›è»¢é€Ÿåº¦ã®æœ€å¤§å€¤
 
-	//ƒJƒƒ‰—h‚ç‚µŠÖ˜A‚Ì’è”--------------------------------------------------------------------
+	//ã‚«ãƒ¡ãƒ©æºã‚‰ã—é–¢é€£ã®å®šæ•°--------------------------------------------------------------------
 
-	static constexpr float TIME_SHAKE = 0.5f;		//ŠÔ
+	static constexpr float TIME_SHAKE = 0.5f;		//æ™‚é–“
 
-	static constexpr float WIDTH_SHAKE = 5.0f;		//•
+	static constexpr float WIDTH_SHAKE = 5.0f;		//å¹…
 
-	static constexpr float SPEED_SHAKE = 40.0f;		//ƒXƒs[ƒh
+	static constexpr float SPEED_SHAKE = 40.0f;		//ã‚¹ãƒ”ãƒ¼ãƒ‰
 
-	//ƒŠƒZƒbƒgŠÖŒW
+	//ãƒªã‚»ãƒƒãƒˆé–¢ä¿‚
 	static constexpr float RESET_TIME = 1.0f;
 	static constexpr float RESET_STEP = 0.05f;
 
-	//‹——£Å’á§ŒÀ
+	//è·é›¢æœ€ä½åˆ¶é™
 	static constexpr float UNDER_LIMIT_Y = 280.0f;
 	static constexpr float HIGHT_LIMIT_Y = 1200.0f;
 
-	// ƒJƒƒ‰‚ÌX‰ñ“]ãŒÀ“xŠp
+	// ã‚«ãƒ¡ãƒ©ã®Xå›è»¢ä¸Šé™åº¦è§’
 	static constexpr float LIMIT_X_UP_RAD = 45.0f * (DX_PI_F / 180.0f);
 	static constexpr float LIMIT_X_DW_RAD = -45.0f * (DX_PI_F / 180.0f);
 
-	//üŒ`•âŠ®
+	//ç·šå½¢è£œå®Œ
 	static constexpr float NO_LERP = 1.0f;
 	static constexpr float LERP_SPEED = 0.05f;
 
-	//ƒJƒƒ‰ƒ‚[ƒh
+	//ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰
 	enum class MODE
 	{
 		NONE,
-		FIXED_POINT,	//’è“_ƒJƒƒ‰
-		FREE,			//ƒtƒŠ[ƒ‚[ƒh
-		FOLLOW,			//’Ç]ƒ‚[ƒh
-		SHAKE,			//ƒJƒƒ‰—h‚ç‚µ
-		LOCKON,			//ƒƒbƒNƒIƒ“
-		RESET,			//ƒJƒƒ‰ˆÊ’uƒŠƒZƒbƒg—p
-		AUTO_MOVE,		//–Ú•WˆÊ’u‚Ü‚Å©“®“I‚ÉˆÚ“®
+		FIXED_POINT,	//å®šç‚¹ã‚«ãƒ¡ãƒ©
+		FREE,			//ãƒ•ãƒªãƒ¼ãƒ¢ãƒ¼ãƒ‰
+		FOLLOW,			//è¿½å¾“ãƒ¢ãƒ¼ãƒ‰
+		SHAKE,			//ã‚«ãƒ¡ãƒ©æºã‚‰ã—
+		LOCKON,			//ãƒ­ãƒƒã‚¯ã‚ªãƒ³
+		RESET,			//ã‚«ãƒ¡ãƒ©ä½ç½®ãƒªã‚»ãƒƒãƒˆç”¨
+		AUTO_MOVE,		//ç›®æ¨™ä½ç½®ã¾ã§è‡ªå‹•çš„ã«ç§»å‹•
 	};
 
 	struct ForFollowInfo
@@ -82,37 +82,37 @@ public:
 		Quaternion quaRot;
 	};
 
-	//ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Camera(void);
 
-	//ƒfƒXƒgƒ‰ƒNƒ^
+	//ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Camera(void);
 
-	//‰Šú‰»ˆ—
+	//åˆæœŸåŒ–å‡¦ç†
 	void Init(void);
 
-	//XVˆ—
+	//æ›´æ–°å‡¦ç†
 	void Update(void);
 
-	//ƒJƒƒ‰‚Ì•`‰æƒ‚[ƒhŠÖ˜A------------------
+	//ã‚«ãƒ¡ãƒ©ã®æç”»ãƒ¢ãƒ¼ãƒ‰é–¢é€£------------------
 	void SetBeforeDraw(void);
 
-	void SetBeforeDrawFixedPoint(void);		//’è“_ƒJƒƒ‰
-	void SetBeforeDrawFree(void);			//ƒtƒŠ[ƒJƒƒ‰
-	void SetBeforeDrawFollow(void);			//’Ç]ƒJƒƒ‰
-	void SetBeforeDrawLockOn(void);			//ƒƒbƒNƒIƒ“ƒJƒƒ‰
-	void SetBeforeDrawShake(void);			//ƒJƒƒ‰ƒVƒFƒCƒN
-	void SetBeforeDrawReset(void);			//ƒJƒƒ‰ƒŠƒZƒbƒg
-	void SetBeforeDrawAutoMove(void);		//ƒJƒƒ‰©“®ˆÚ“®
+	void SetBeforeDrawFixedPoint(void);		//å®šç‚¹ã‚«ãƒ¡ãƒ©
+	void SetBeforeDrawFree(void);			//ãƒ•ãƒªãƒ¼ã‚«ãƒ¡ãƒ©
+	void SetBeforeDrawFollow(void);			//è¿½å¾“ã‚«ãƒ¡ãƒ©
+	void SetBeforeDrawLockOn(void);			//ãƒ­ãƒƒã‚¯ã‚ªãƒ³ã‚«ãƒ¡ãƒ©
+	void SetBeforeDrawShake(void);			//ã‚«ãƒ¡ãƒ©ã‚·ã‚§ã‚¤ã‚¯
+	void SetBeforeDrawReset(void);			//ã‚«ãƒ¡ãƒ©ãƒªã‚»ãƒƒãƒˆ
+	void SetBeforeDrawAutoMove(void);		//ã‚«ãƒ¡ãƒ©è‡ªå‹•ç§»å‹•
 
 	//----------------------------------------
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	void Draw(void);
 
-	//‰ğ•úˆ—
+	//è§£æ”¾å‡¦ç†
 	void Release(void);
 
-	//À•Wæ“¾
+	//åº§æ¨™å–å¾—
 	const VECTOR& GetPos(void) const;
 	const VECTOR& GetLockPos(void)const;
 	const VECTOR& GetGoalPos(void)const { return goalDirecPos_; }
@@ -122,119 +122,119 @@ public:
 	const VECTOR& GetIdealPos(void)const { return idealPos_; }
 	void SetAdjustedPos(const VECTOR& _pos) { adjustedPos_ = _pos; }
 
-	//‰ñ“]æ“¾
+	//å›è»¢å–å¾—
 	const Quaternion& GetRot(void)const;
 	const VECTOR& GetAngle(void)const;
-	//‰ñ“]ƒXƒs[ƒh
+	//å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰
 	const VECTOR& GetRotSpeed(void)const;
 	void SetRotSpeed(const VECTOR& _speed);
 
-	//‹üæ“¾
+	//è¦–ç·šå–å¾—
 	const VECTOR& GetCameraRay(void)const;
 	const VECTOR& GetCameraRayNormalised(void)const;
 
-	//ƒJƒƒ‰ƒ‚[ƒh‚Ì•ÏX
+	//ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰ã®å¤‰æ›´
 	void ChangeMode(MODE mode);
 
-	//’Ç]‘ÎÛ‚Ìİ’è
+	//è¿½å¾“å¯¾è±¡ã®è¨­å®š
 	void SetFollow(const VECTOR _pos,const Quaternion _qua);
 
-	//ƒƒbƒNƒIƒ“Å’áŒÀ‹——£İ’è
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æœ€ä½é™è·é›¢è¨­å®š
 	void SetLockOnDistanceMin(const float _distance) { lockOnDistanceMin_ = _distance; }
 
-	//À•Wİ’è
+	//åº§æ¨™è¨­å®š
 	void SetPos(const VECTOR& pos,const VECTOR& focus);
 	void SetPos(const VECTOR& pos);
 	void SetFocusPos(const VECTOR& _focus);
 	void SetGoalFocusPos(const VECTOR& _focus);
-	void SetLockPos(const VECTOR& _lock);	//_isRote=ƒƒbƒNƒIƒ“’†‰ñ“]‚ğ—LŒø‚É‚·‚é‚©(”\—Íg—p’†‚Í‰ñ“]‚µ‚È‚¢‚½‚ß‚»‚ê—p)
+	void SetLockPos(const VECTOR& _lock);	//_isRote=ãƒ­ãƒƒã‚¯ã‚ªãƒ³ä¸­å›è»¢ã‚’æœ‰åŠ¹ã«ã™ã‚‹ã‹(èƒ½åŠ›ä½¿ç”¨ä¸­ã¯å›è»¢ã—ãªã„ãŸã‚ãã‚Œç”¨)
 	void SetGoalPos(const VECTOR& _goal);
 
-	//ƒJƒƒ‰‚ğ‰ŠúˆÊ’u‚É–ß‚·
+	//ã‚«ãƒ¡ãƒ©ã‚’åˆæœŸä½ç½®ã«æˆ»ã™
 	void SetDefault(void);
 
-	//Ä“xƒJƒƒ‰ƒRƒ‰ƒCƒ_[‚ğƒZƒbƒg‚·‚é
+	//å†åº¦ã‚«ãƒ¡ãƒ©ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’ã‚»ãƒƒãƒˆã™ã‚‹
 	void ResetCollider(void);
 
 	const MODE& GetMode(void)const;
-	const bool IsFinishShake(void) { return finishShake_; }	//‰æ–Ê—h‚êI—¹”»•Ê
+	const bool IsFinishShake(void) { return finishShake_; }	//ç”»é¢æºã‚Œçµ‚äº†åˆ¤åˆ¥
 
 	void DrawDebug(void);
 
-	//‘O•û‚Ìæ“¾
+	//å‰æ–¹ã®å–å¾—
 	const VECTOR GetForward(void);
 
-	//‰e—p‚Ìİ’è
+	//å½±ç”¨ã®è¨­å®š
 	void CameraSettingShadow(void);
 
 private:
-	//ƒRƒ‰ƒCƒ_[
+	//ã‚³ãƒ©ã‚¤ãƒ€ãƒ¼
 	std::unique_ptr<CameraCollider> collider_;
 
-	//’Ç]‘ÎÛ
+	//è¿½å¾“å¯¾è±¡
 	ForFollowInfo followObject_;
-	//ŠJnE–Ú•WˆÊ’u(ƒŠƒZƒbƒg‚È‚Ç‚Ég—p)
+	//é–‹å§‹ãƒ»ç›®æ¨™ä½ç½®(ãƒªã‚»ãƒƒãƒˆæ™‚ãªã©ã«ä½¿ç”¨)
 	ForFollowInfo start_;
 	ForFollowInfo goal_;
 	float stepReset_;
 	bool isReset_;
 
-	//ƒJƒƒ‰ƒ‚[ƒh
+	//ã‚«ãƒ¡ãƒ©ãƒ¢ãƒ¼ãƒ‰
 	MODE mode_;			
-	MODE currentMode_;	//ShakeEReset‚É‘JˆÚ‚·‚éÛ‚ÉŒ»İ‚Ì•¨‚ğ•Û‘¶‚·‚é
+	MODE currentMode_;	//Shakeãƒ»Resetã«é·ç§»ã™ã‚‹éš›ã«ç¾åœ¨ã®ç‰©ã‚’ä¿å­˜ã™ã‚‹
 
-	//ƒJƒƒ‰‚ÌˆÊ’u
+	//ã‚«ãƒ¡ãƒ©ã®ä½ç½®
 	VECTOR pos_;
 
-	//ƒƒbƒNƒIƒ“‘ÎÛ‚ÌˆÊ’u
-	VECTOR lockPos_;		//ƒƒbƒNƒIƒ“‘ÎÛ‚ÌˆÊ’u
-	VECTOR prevGoalPos_;	//‘O‰ñ‚Ì–Ú•WˆÊ’u
-	VECTOR lockOnGoalPos_;	//–Ú•WˆÊ’u(ƒƒbƒNƒIƒ“)
-	float lockOnDistanceMin_;	//ƒƒbƒNƒIƒ“‚ÌÅ’á‹——£
+	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³å¯¾è±¡ã®ä½ç½®
+	VECTOR lockPos_;		//ãƒ­ãƒƒã‚¯ã‚ªãƒ³å¯¾è±¡ã®ä½ç½®
+	VECTOR prevGoalPos_;	//å‰å›ã®ç›®æ¨™ä½ç½®
+	VECTOR lockOnGoalPos_;	//ç›®æ¨™ä½ç½®(ãƒ­ãƒƒã‚¯ã‚ªãƒ³)
+	float lockOnDistanceMin_;	//ãƒ­ãƒƒã‚¯ã‚ªãƒ³æ™‚ã®æœ€ä½è·é›¢
 
-	//ƒJƒƒ‰‚Ì’‹“_
+	//ã‚«ãƒ¡ãƒ©ã®æ³¨è¦–ç‚¹
 	VECTOR focusPos_;
 	VECTOR goalFocusPos_;
 	
-	//ˆÚ“®–Ú•WˆÊ’u
+	//ç§»å‹•ç›®æ¨™ä½ç½®
 	VECTOR goalDirecPos_;
 
-	// ƒJƒƒ‰‚Ì—‘zˆÊ’ui’Ç]ŒvZ‚ÅŠm’èj
+	// ã‚«ãƒ¡ãƒ©ã®ç†æƒ³ä½ç½®ï¼ˆè¿½å¾“è¨ˆç®—ã§ç¢ºå®šï¼‰
 	VECTOR idealPos_;
-	// CameraCollider‚©‚çó‚¯æ‚Á‚½•â³Œã‚Ì–Ú•WˆÊ’u
+	// CameraColliderã‹ã‚‰å—ã‘å–ã£ãŸè£œæ­£å¾Œã®ç›®æ¨™ä½ç½®
 	VECTOR adjustedPos_;
 
-	//ƒJƒƒ‰‚Ìã•ûŒü
+	//ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	VECTOR cameraUp_;
 
-	//ƒJƒƒ‰‚Ì‰ñ“]
+	//ã‚«ãƒ¡ãƒ©ã®å›è»¢
 	Quaternion rot_;
 	
 
-	//‰ñ“]ƒXƒs[ƒh
+	//å›è»¢ã‚¹ãƒ”ãƒ¼ãƒ‰
 	VECTOR rotSpeed_;
 
-	// ƒJƒƒ‰Šp“x(rad)
+	// ã‚«ãƒ¡ãƒ©è§’åº¦(rad)
 	VECTOR angles_;
-	// X²‰ñ“]‚ª–³‚¢Šp“x
+	// Xè»¸å›è»¢ãŒç„¡ã„è§’åº¦
 	Quaternion rotOutX_;
 
-	//‰æ–Ê—h‚ç‚µ—p
+	//ç”»é¢æºã‚‰ã—ç”¨
 	float stepShake_;
 
-	//‰æ–Ê—h‚ê‚ªI‚í‚Á‚½‚©
+	//ç”»é¢æºã‚ŒãŒçµ‚ã‚ã£ãŸã‹
 	bool finishShake_;
-	//‰‰o‘OˆÊ’u
+	//æ¼”å‡ºå‰ä½ç½®
 	VECTOR defaultPos_;
-	//—h‚ê•ûŒü
+	//æºã‚Œæ–¹å‘
 	VECTOR shakeDir_;
-	//•âŠ®ƒXƒs[ƒh
+	//è£œå®Œã‚¹ãƒ”ãƒ¼ãƒ‰
 	float lerpStep_;
 
-	//’Ç]‘ÎÛ‚Æ‚Ì‹——£
+	//è¿½å¾“å¯¾è±¡ã¨ã®è·é›¢
 	VECTOR c2fRelative_;
 
-	//‰ñ“]
+	//å›è»¢
 	void Rotation(void);
 };
 

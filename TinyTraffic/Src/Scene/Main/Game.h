@@ -1,5 +1,9 @@
 #pragma once
+#include<memory>
 #include "../SceneBase.h"
+
+class Map;
+
 class Game :
     public SceneBase
 {
@@ -17,6 +21,6 @@ public:
 	void Reset(void)override;
 
 private:
-
+	std::unique_ptr<Map> map_;
 };
 

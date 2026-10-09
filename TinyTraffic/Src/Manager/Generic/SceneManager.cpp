@@ -101,8 +101,6 @@ void SceneManager::Update(void)
 	deltaTime_ = static_cast<float>(
 		std::chrono::duration_cast<std::chrono::nanoseconds>(nowTime - preTime_).count() / 1000000000.0);
 
-
-
 	totalTime_ += deltaTime_;
 	preTime_ = nowTime;
 

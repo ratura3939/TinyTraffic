@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <string>
 
 class Application
@@ -6,7 +6,7 @@ class Application
 
 public:
 
-	// ƒXƒNƒŠ[ƒ“ƒTƒCƒY
+	// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚º
 	//static constexpr int SCREEN_SIZE_X = 1920;
 	//static constexpr int SCREEN_SIZE_Y = 1080;
 	static constexpr int SCREEN_SIZE_X = 800;
@@ -15,7 +15,7 @@ public:
 	static constexpr float FRAME_RATE = 1000.0f / 60.0f;
 	static constexpr float DEFAULT_FPS = 60.0f;
 
-	// ƒf[ƒ^ƒpƒXŠÖ˜A
+	// ãƒ‡ãƒ¼ã‚¿ãƒ‘ã‚¹é–¢é€£
 	//-------------------------------------------
 	static const std::wstring PATH_IMAGE;
 	static const std::wstring PATH_UI;
@@ -30,65 +30,65 @@ public:
 	static const std::wstring PATH_JSON;
 	//-------------------------------------------
 
-	// –¾¦“I‚ÉƒCƒ“ƒXƒeƒ“ƒX‚ğ¶¬‚·‚é
+	// æ˜ç¤ºçš„ã«ã‚¤ãƒ³ã‚¹ãƒ†ãƒ³ã‚¹ã‚’ç”Ÿæˆã™ã‚‹
 	static void CreateInstance(void);
 
-	// Ã“IƒCƒ“ƒXƒ^ƒ“ƒX‚Ìæ“¾
+	// é™çš„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®å–å¾—
 	static Application& GetInstance(void);
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Init(void);
 
-	// ƒQ[ƒ€ƒ‹[ƒv‚ÌŠJn
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—ã®é–‹å§‹
 	void Run(void);
 
-	// ƒŠƒ\[ƒX‚Ì”jŠü
+	// ãƒªã‚½ãƒ¼ã‚¹ã®ç ´æ£„
 	void Destroy(void);
 
-	// ‰Šú‰»¬Œ÷^¸”s‚Ì”»’è
+	// åˆæœŸåŒ–æˆåŠŸï¼å¤±æ•—ã®åˆ¤å®š
 	bool IsInitFail(void) const;
 
-	// ‰ğ•ú¬Œ÷^¸”s‚Ì”»’è
+	// è§£æ”¾æˆåŠŸï¼å¤±æ•—ã®åˆ¤å®š
 	bool IsReleaseFail(void) const;
 
-	//ƒQ[ƒ€‚ÌI—¹
+	//ã‚²ãƒ¼ãƒ ã®çµ‚äº†
 	void EndGame(void);
 
-	//ƒXƒNƒŠ[ƒ“ƒTƒCƒYæ“¾
+	//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚µã‚¤ã‚ºå–å¾—
 	const int GetWindowWidth(void) { return width_; }
 	const int GetWindowHeight(void) { return height_; }
 
-	//ƒXƒNƒŠ[ƒ“’†‰›ˆÊ’uæ“¾
+	//ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ä¸­å¤®ä½ç½®å–å¾—
 	const VECTOR& GetWindowCenterPos(void) { return { width_ / 2.0f, height_ / 2.0f, 0.0f }; }
 
 private:
 
-	//ƒtƒŒ[ƒ€ŒÅ’è—p
-	int currentFrame_;	//Œ»İ‚ÌƒtƒŒ[ƒ€‚ğ•Û‘¶
-	int lastFrame_;		//ÅŒã‚ÉÀs‚µ‚½ƒtƒŒ[ƒ€‚ğ•Û‘¶
+	//ãƒ•ãƒ¬ãƒ¼ãƒ å›ºå®šç”¨
+	int currentFrame_;	//ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä¿å­˜
+	int lastFrame_;		//æœ€å¾Œã«å®Ÿè¡Œã—ãŸãƒ•ãƒ¬ãƒ¼ãƒ ã‚’ä¿å­˜
 
-	// Ã“IƒCƒ“ƒXƒ^ƒ“ƒX
+	// é™çš„ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹
 	static Application* instance_;
 
-	// ‰Šú‰»¸”s
+	// åˆæœŸåŒ–å¤±æ•—
 	bool isInitFail_;
 
-	// ‰ğ•ú¸”s
+	// è§£æ”¾å¤±æ•—
 	bool isReleaseFail_;
 
 	int width_;
 	int height_;
 
-	bool isLoop_;	//ˆ—‚ğs‚¢‘±‚¯‚é‚©
+	bool isLoop_;	//å‡¦ç†ã‚’è¡Œã„ç¶šã‘ã‚‹ã‹
 
-	// ƒfƒtƒHƒ‹ƒgƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ğprivate‚É‚µ‚ÄA
-	// ŠO•”‚©‚ç¶¬‚Å‚«‚È‚¢—l‚É‚·‚é
+	// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚’privateã«ã—ã¦ã€
+	// å¤–éƒ¨ã‹ã‚‰ç”Ÿæˆã§ããªã„æ§˜ã«ã™ã‚‹
 	Application(void);
 
-	// ƒRƒs[ƒRƒ“ƒXƒgƒ‰ƒNƒ^‚à“¯—l
+	// ã‚³ãƒ”ãƒ¼ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚‚åŒæ§˜
 	Application(const Application&);
 
-	// ƒfƒXƒgƒ‰ƒNƒ^‚à“¯—l
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã‚‚åŒæ§˜
 	~Application(void) = default;
 
 };

@@ -1,4 +1,4 @@
-#include"pch.h"
+ï»¿#include"pch.h"
 #include<Windows.h>
 #include "Manager/Generic/ResourceManager.h"
 #include "Manager/Generic/InputManager.h"
@@ -36,26 +36,26 @@ Application& Application::GetInstance(void)
 void Application::Init(void)
 {
 
-	// ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Ì‰Šúİ’è
+	// ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã®åˆæœŸè¨­å®š
 	SetWindowText(L"TinyTraffic");
 
 
-	// Às’†ƒEƒBƒ“ƒhƒE‚ª‚ ‚éƒ‚ƒjƒ^[‚ğæ“¾
+	// å®Ÿè¡Œä¸­ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãŒã‚ã‚‹ãƒ¢ãƒ‹ã‚¿ãƒ¼ã‚’å–å¾—
 	HMONITOR hMonitor = MonitorFromWindow(GetMainWindowHandle(), MONITOR_DEFAULTTONEAREST);
 
 	MONITORINFO mi;
 	mi.cbSize = sizeof(mi);
 	GetMonitorInfo(hMonitor, &mi);
 
-	// ƒ‚ƒjƒ^[‚Ì•E‚‚³
+	// ãƒ¢ãƒ‹ã‚¿ãƒ¼ã®å¹…ãƒ»é«˜ã•
 	width_ = (mi.rcMonitor.right - mi.rcMonitor.left) / 2;
 	height_ = (mi.rcMonitor.bottom - mi.rcMonitor.top) / 2;
 
-	// ƒEƒBƒ“ƒhƒEƒTƒCƒY
+	// ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚º
 	SetGraphMode(width_, height_, 32);
 	ChangeWindowMode(true);
 
-	// DxLib‚Ì‰Šú‰»
+	// DxLibã®åˆæœŸåŒ–
 	SetUseDirect3DVersion(DX_DIRECT3D_11);
 	isInitFail_ = false;
 	if (DxLib_Init() == -1)
@@ -63,7 +63,7 @@ void Application::Init(void)
 		isInitFail_ = true;
 		return;
 	}
-	//ƒGƒtƒFƒNƒVƒA‰Šú‰»
+	//ã‚¨ãƒ•ã‚§ã‚¯ã‚·ã‚¢åˆæœŸåŒ–
 	if (Effekseer_Init(8000) == -1)
 	{
 		DxLib_End();
@@ -71,20 +71,20 @@ void Application::Init(void)
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
 	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 
-	//ƒ}ƒEƒXƒJ[ƒ\ƒ‹”ñ•\¦
+	//ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«éè¡¨ç¤º
 	SetMouseDispFlag(FALSE);
 
-	// ƒL[§Œä‰Šú‰»
+	// ã‚­ãƒ¼åˆ¶å¾¡åˆæœŸåŒ–
 	SetUseDirectInputFlag(true);
 	InputManager::CreateInstance();
 
-	// ƒŠƒ\[ƒXŠÇ—‰Šú‰»
+	// ãƒªã‚½ãƒ¼ã‚¹ç®¡ç†åˆæœŸåŒ–
 	ResourceManager::CreateInstance();
 
-	// ƒV[ƒ“ŠÇ—‰Šú‰»
+	// ã‚·ãƒ¼ãƒ³ç®¡ç†åˆæœŸåŒ–
 	SceneManager::CreateInstance();
 
-	//FPS—p‰Šú‰»
+	//FPSç”¨åˆæœŸåŒ–
 	currentFrame_ = 0;
 	lastFrame_ = 0;
 
@@ -96,19 +96,19 @@ void Application::Run(void)
 	auto& inputManager = InputManager::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 
-	// ƒQ[ƒ€ƒ‹[ƒv
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 	while (isLoop_ && ProcessMessage() == 0)
 	{
 
-		Sleep(1);	//ƒVƒXƒeƒ€‚Éˆ—‚ğ•Ô‚·
-		currentFrame_ = GetNowCount();	//Œ»İ‚ÌƒtƒŒ[ƒ€”‚ğŠl“¾
+		Sleep(1);	//ã‚·ã‚¹ãƒ†ãƒ ã«å‡¦ç†ã‚’è¿”ã™
+		currentFrame_ = GetNowCount();	//ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’ç²å¾—
 
-		//Œ»İ‚ÌƒtƒŒ[ƒ€‚ÆÅŒã‚ÌÀsƒtƒŒ[ƒ€‚Ì·•ª‚ªˆê’è’l‚ğ’´‚¦‚½‚çXVˆ—‚ğs‚¤B
+		//ç¾åœ¨ã®ãƒ•ãƒ¬ãƒ¼ãƒ ã¨æœ€å¾Œã®å®Ÿè¡Œãƒ•ãƒ¬ãƒ¼ãƒ ã®å·®åˆ†ãŒä¸€å®šå€¤ã‚’è¶…ãˆãŸã‚‰æ›´æ–°å‡¦ç†ã‚’è¡Œã†ã€‚
 		if (currentFrame_ - lastFrame_ >= FRAME_RATE)
 		{
-			lastFrame_ = currentFrame_;	//ƒtƒŒ[ƒ€‚ÌXV
+			lastFrame_ = currentFrame_;	//ãƒ•ãƒ¬ãƒ¼ãƒ ã®æ›´æ–°
 			inputManager.Update();
-			sceneManager.Update();	//XV
+			sceneManager.Update();	//æ›´æ–°
 		}
 
 		sceneManager.Draw();
@@ -125,9 +125,9 @@ void Application::Destroy(void)
 	ResourceManager::GetInstance().Destroy();
 	SceneManager::GetInstance().Destroy();
 	
-	// Effekseer‚ğI—¹‚·‚éB
+	// Effekseerã‚’çµ‚äº†ã™ã‚‹ã€‚
 	Effkseer_End();
-	// DxLibI—¹
+	// DxLibçµ‚äº†
 	if (DxLib_End() == -1)
 	{
 		isReleaseFail_ = true;

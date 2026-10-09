@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../Common/ActorBase.h"
 class Map :
     public ActorBase
@@ -14,6 +14,9 @@ private:
     void DoInit(void) override;
 	void DoUpdate(void) override;
 
+	void DrawGrid(void);	//グリッド描画
+
 	int mapImage_;  //マップ画像
+	float scale_;   //マップの拡大率
 };
 

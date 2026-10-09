@@ -57,7 +57,7 @@ void ResourceManager::InitGame(void)
 	Resource res;
 
 	//テストマップ１
-	res = Resource(Resource::TYPE::IMG, Application::PATH_IMAGE + L"Map/TestMap1.png");
+	res = Resource(Resource::TYPE::IMG, Application::PATH_IMAGE + L"Map/TestMap.png");
 	resourcesMap_.emplace(SRC::TEST_MAP_1_IMG, res);
 }
 

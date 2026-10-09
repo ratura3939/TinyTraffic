@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 //地形種別
 enum class TERRAIN_TYPE {
