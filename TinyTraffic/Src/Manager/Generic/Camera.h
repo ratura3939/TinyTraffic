@@ -20,12 +20,12 @@ public:
 
 	//カメラ座標関連の定数---------------------------------------------------------------------
 	
-	static constexpr VECTOR DEFAULT_CAMERA_POS = { 0.0f, 700.0f, -700.0f };			//カメラの初期座標
+	static constexpr VECTOR DEFAULT_CAMERA_POS = { 0.0f, 700.0f, -1200.0f };			//カメラの初期座標
 
-	static constexpr VECTOR RELATIVE_C2T_POS = { 0.0f, -300.0f, 500.0f };			//カメラ位置から注視点までの相対座標
+	static constexpr VECTOR RELATIVE_C2T_POS = { 0.0f, 0.0f, 0.0f };			//カメラ位置から注視点までの相対座標
 
 	
-	static constexpr VECTOR RELATIVE_F2C_POS_FOLLOW = { 0.0f, 300.0f, -500.0f };	//追従対象からカメラ位置までの相対座標(完全追従)
+	static constexpr VECTOR RELATIVE_F2C_POS_FOLLOW = { 0.0f, 0.0f, 0.0f };	//追従対象からカメラ位置までの相対座標(完全追従)
 
 	//static constexpr VECTOR RELATIVE_F2C_POS_SPRING = { 0.0f, 40.0f, 150.0f };	//追従対象からカメラ位置までの相対座標(ばね付き)
 
@@ -166,6 +166,12 @@ public:
 
 	//影用の設定
 	void CameraSettingShadow(void);
+
+	//後退する
+	void MoveBackCamera(const float _speed);
+
+	//前進する
+	void MoveForwardCamera(const float _speed);
 
 private:
 	//コライダー

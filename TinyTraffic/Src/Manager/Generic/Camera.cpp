@@ -140,6 +140,21 @@ void Camera::SetBeforeDrawFixedPoint(void)
 
 void Camera::SetBeforeDrawFree(void)
 {
+	InputManager& inputM = InputManager::GetInstance();
+
+	//カメラを動かす
+	if (inputM.IsPressed(InputManager::INPUT_COMMAND::UP)) {
+		pos_ = VAdd(pos_, VScale(rot_.GetForward(), SPEED));
+	}
+	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::DOWN)) {
+		pos_ = VAdd(pos_, VScale(rot_.GetBack(), SPEED));
+	}
+	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::LEFT)) {
+		pos_ = VAdd(pos_, VScale(rot_.GetLeft(), SPEED));
+	}
+	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::RIGHT)) {
+		pos_ = VAdd(pos_, VScale(rot_.GetRight(), SPEED));
+	}
 }
 
 void Camera::SetBeforeDrawFollow(void)
@@ -550,6 +565,16 @@ void Camera::CameraSettingShadow(void)
 
 	//カメラの視点、注視点の設定
 	SetCameraPositionAndTarget_UpVecY(pos_, targetPos);
+}
+
+void Camera::MoveBackCamera(const float _speed)
+{
+	pos_ = VAdd(pos_, VScale(rot_.GetBack(), _speed));
+}
+
+void Camera::MoveForwardCamera(const float _speed)
+{
+	pos_ = VAdd(pos_, VScale(rot_.GetForward(), _speed));
 }
 
 void Camera::SetDefault(void)

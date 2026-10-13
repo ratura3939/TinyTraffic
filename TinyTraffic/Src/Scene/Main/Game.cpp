@@ -1,5 +1,7 @@
 #include "../../pch.h"
 #include"../../Manager/Generic/ResourceManager.h"
+#include"../../Manager/Generic/SceneManager.h"
+#include"../../Manager/Generic/Camera.h"
 #include"../../Manager/GameSystem/CursorManager.h"
 #include"../../Object/Map/Map.h"
 #include "Game.h"
@@ -19,6 +21,8 @@ void Game::Init(void)
 {
 	ResourceManager& resM = ResourceManager::GetInstance();
 	resM.Init(SceneManager::SCENE_ID::GAME);
+
+	SceneManager::GetInstance().GetCamera().ChangeMode(Camera::MODE::FIXED_POINT);
 
 	map_ = std::make_unique<Map>(resM.Load(ResourceManager::SRC::TEST_MAP_1_IMG).handleId_);
 	map_->Load();
