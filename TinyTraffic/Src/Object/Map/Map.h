@@ -16,6 +16,9 @@ public:
     void Draw(void) override;
 	void Release(void) override;
 
+	//進行度から拡大率を設定する
+	void SetScaleFromProgress(const float _progress);	
+
 private:
     void DoLoad(void) override;
     void DoInit(void) override;

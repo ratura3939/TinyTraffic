@@ -28,18 +28,23 @@ Map::~Map(void)
 void Map::Draw(void)
 {
 	const VECTOR& centerPos = Application::GetInstance().GetWindowCenterPos();
-	DrawRotaGraph(static_cast<int>(centerPos.x), static_cast<int>(centerPos.y), SCALE_GAME_END, 0.0f, mapImage_, false);
+	DrawRotaGraph(static_cast<int>(centerPos.x), static_cast<int>(centerPos.y), scale_, 0.0f, mapImage_, false);
 
 	//グリッド線の描画
 	DrawGrid();
-
-	auto& cameraPos = SceneManager::GetInstance().GetCamera().GetPos();
-
-	DrawFormatString(0, 0,0xff000, L"CameraPos:%.2f,%.2f,%.2f", cameraPos.x, cameraPos.y, cameraPos.z);
 }
 
 void Map::Release(void)
 {
+}
+
+void Map::SetScaleFromProgress(const float _progress)
+{
+	//ゲームの開始から終了までの拡大率変化賞
+	float totalScalingAmount = SCALE_GAME_END - SCALE_GAME_START;
+
+	//進行度に応じて拡大率を設定
+	scale_ = SCALE_GAME_START + totalScalingAmount * _progress;
 }
 
 void Map::DoLoad(void)
@@ -53,18 +58,7 @@ void Map::DoInit(void)
 
 void Map::DoUpdate(void)
 {
-	InputManager& inputM = InputManager::GetInstance();
-
-	const float cameraSpeed = 1.0f;
-
-	if (inputM.IsPressed(InputManager::INPUT_COMMAND::ENTER))
-	{
-		SceneManager::GetInstance().GetCamera().MoveBackCamera(cameraSpeed);
-	}
-	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::CANCEL))
-	{
-		SceneManager::GetInstance().GetCamera().MoveForwardCamera(cameraSpeed);
-	}
+	
 }
 
 void Map::DrawGrid(void)
