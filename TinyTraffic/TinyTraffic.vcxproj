@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Src\Manager\GameSystem\NavigationSystem.cpp" />
+    <ClCompile Include="Src\Manager\GameSystem\Navigation\NavigationSystem.cpp" />
     <ClCompile Include="Src\Object\Map\Map.cpp" />
     <ClCompile Include="Src\Object\SelectBox.cpp" />
     <ClCompile Include="Src\Manager\GameSystem\CursorManager.cpp" />
@@ -177,7 +177,8 @@
     <ClCompile Include="Src\Manager\GameSystem\TileManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Src\Manager\GameSystem\NavigationSystem.h" />
+    <ClInclude Include="Src\Constans\GameRule.h" />
+    <ClInclude Include="Src\Manager\GameSystem\Navigation\NavigationSystem.h" />
     <ClInclude Include="Src\Object\Map\Map.h" />
     <ClInclude Include="Src\Object\Map\Tile\TileType.h" />
     <ClInclude Include="Src\Object\SelectBox.h" />

@@ -3,16 +3,11 @@
 #include"../../Manager/Generic/InputManager.h"
 #include"../../Manager/Generic/SceneManager.h"
 #include"../../Manager/Generic/Camera.h"
+#include"../../Manager/GameSystem/TileManager.h"
+#include"../../Constans/GameRule.h"
 #include "Map.h"
 
 namespace {
-	const float SCALE_GAME_START = 4.0f;	//マップの初期拡大率
-	const float SCALE_GAME_END = 1.7f;		//マップの最終拡大率
-
-	const int GRIT_X_NUM = 36;	//グリッドの横の数
-	const int GRIT_Y_NUM = 20;	//グリッドの縦の数
-	const float GRIT_SIZE = 16.0f * SCALE_GAME_END;	//グリッドの大きさ(大きさは最終拡大率基準)
-
 	const int GRID_COLOR = 0xff0000;	//グリッドの色(R)
 }
 
@@ -30,6 +25,9 @@ void Map::Draw(void)
 	const VECTOR& centerPos = Application::GetInstance().GetWindowCenterPos();
 	DrawRotaGraph(static_cast<int>(centerPos.x), static_cast<int>(centerPos.y), scale_, 0.0f, mapImage_, false);
 
+	//タイルの描画
+	TileManager::GetInstance().Draw();
+
 	//グリッド線の描画
 	DrawGrid();
 }
@@ -41,19 +39,20 @@ void Map::Release(void)
 void Map::SetScaleFromProgress(const float _progress)
 {
 	//ゲームの開始から終了までの拡大率変化賞
-	float totalScalingAmount = SCALE_GAME_END - SCALE_GAME_START;
+	float totalScalingAmount = MAP_SCALE_GAME_END - MAP_SCALE_GAME_START;
 
 	//進行度に応じて拡大率を設定
-	scale_ = SCALE_GAME_START + totalScalingAmount * _progress;
+	scale_ = MAP_SCALE_GAME_START + totalScalingAmount * _progress;
 }
 
 void Map::DoLoad(void)
 {
+	TileManager::CreateInstance(SingletonRegistry::DESTROY_TIMING::GAME_END);
 }
 
 void Map::DoInit(void)
 {
-	scale_ = SCALE_GAME_START;
+	scale_ = MAP_SCALE_GAME_START;
 }
 
 void Map::DoUpdate(void)
@@ -64,8 +63,8 @@ void Map::DoUpdate(void)
 void Map::DrawGrid(void)
 {
 	//グリッドの半分の長さ
-	const int halfGridX = GRIT_X_NUM / 2;
-	const int halfGridY = GRIT_Y_NUM / 2;
+	const int halfGridX = TILE_NUM_X / 2;
+	const int halfGridY = TILE_NUM_Y / 2;
 
 	Application& app = Application::GetInstance();
 
@@ -82,15 +81,15 @@ void Map::DrawGrid(void)
 
 	//列用グリッドの生成(X方向)
 	drawGridStartPos = { startX, startY, 0.0f };
-	drawGridEndPos = { startX, startY + GRIT_SIZE * GRIT_Y_NUM, 0.0f };
+	drawGridEndPos = { startX, startY + GRIT_SIZE * TILE_NUM_Y, 0.0f };
 
-	DrawGridLines(drawGridStartPos, drawGridEndPos, GRIT_X_NUM, GRID_DRAW_TYPE::GIRID_X);
+	DrawGridLines(drawGridStartPos, drawGridEndPos, TILE_NUM_X, GRID_DRAW_TYPE::GIRID_X);
 
 	//行用グリッドの生成(Y方向)
 	drawGridStartPos = { startX, startY, 0.0f };
-	drawGridEndPos = { startX + GRIT_SIZE * GRIT_X_NUM, startY, 0.0f };
+	drawGridEndPos = { startX + GRIT_SIZE * TILE_NUM_X, startY, 0.0f };
 
-	DrawGridLines(drawGridStartPos, drawGridEndPos, GRIT_Y_NUM, GRID_DRAW_TYPE::GRID_Y);
+	DrawGridLines(drawGridStartPos, drawGridEndPos, TILE_NUM_Y, GRID_DRAW_TYPE::GRID_Y);
 }
 
 void Map::DrawGridLines(const VECTOR& _startPos, const VECTOR& _endPos, const int _drawNum, const GRID_DRAW_TYPE& _drawType)

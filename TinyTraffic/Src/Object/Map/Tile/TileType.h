@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+static const int TILE_SIZE = 32;	//タイルのサイズ
+
 //地形種別
 enum class TERRAIN_TYPE {
 	NORMAL		//通常

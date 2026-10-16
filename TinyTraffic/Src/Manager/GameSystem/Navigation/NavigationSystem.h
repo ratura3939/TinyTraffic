@@ -1,5 +1,7 @@
-#pragma once
-#include "../../Common/Singleton.h"
+﻿#pragma once
+#include "../../../Common/Singleton.h"
+#include"../../../Constans/GameRule.h"
+
 class NavigationSystem :
     public Singleton<NavigationSystem>
 {
@@ -15,5 +17,7 @@ public:
 private:
 	NavigationSystem(void);
 	~NavigationSystem(void)override;
+
+
 };
 

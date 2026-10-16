@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include<memory>
 #include"../../Common/Singleton.h"
+#include"../../Constans/GameRule.h"
 
 class Tile;
 class TileState;
@@ -12,9 +13,6 @@ class TileManager :
     friend class Singleton<TileManager>;
 
 public:
-	static constexpr int TILE_NUM_X = 36;	//タイルのX方向の数
-	static constexpr int TILE_NUM_Y = 20;	//タイルのY方向の数
-
     void Load(void)override;
     void Init(void)override;
     void Update(void);
