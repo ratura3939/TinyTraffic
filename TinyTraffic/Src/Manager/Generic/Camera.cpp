@@ -140,21 +140,7 @@ void Camera::SetBeforeDrawFixedPoint(void)
 
 void Camera::SetBeforeDrawFree(void)
 {
-	InputManager& inputM = InputManager::GetInstance();
-
-	//カメラを動かす
-	if (inputM.IsPressed(InputManager::INPUT_COMMAND::UP)) {
-		pos_ = VAdd(pos_, VScale(rot_.GetForward(), SPEED));
-	}
-	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::DOWN)) {
-		pos_ = VAdd(pos_, VScale(rot_.GetBack(), SPEED));
-	}
-	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::LEFT)) {
-		pos_ = VAdd(pos_, VScale(rot_.GetLeft(), SPEED));
-	}
-	else if (inputM.IsPressed(InputManager::INPUT_COMMAND::RIGHT)) {
-		pos_ = VAdd(pos_, VScale(rot_.GetRight(), SPEED));
-	}
+	
 }
 
 void Camera::SetBeforeDrawFollow(void)

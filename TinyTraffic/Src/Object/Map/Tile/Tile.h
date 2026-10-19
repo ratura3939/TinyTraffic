@@ -16,6 +16,9 @@ public:
         , MAX
     };
 
+    Tile(const VECTOR& _position);
+    ~Tile(void)override;
+
     void Draw(void)override;
     void Release(void)override;
 

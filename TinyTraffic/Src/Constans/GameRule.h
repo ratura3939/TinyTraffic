@@ -18,5 +18,3 @@ static constexpr float MAP_SCALE_GAME_END = 1.7f;		//マップの最終拡大率
 
 const float GRIT_SIZE = 16.0f * MAP_SCALE_GAME_END;	//グリッドの大きさ(大きさは最終拡大率基準)
 #pragma endregion
-
-

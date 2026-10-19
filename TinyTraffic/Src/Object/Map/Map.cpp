@@ -57,7 +57,12 @@ void Map::DoInit(void)
 
 void Map::DoUpdate(void)
 {
-	
+	Application& app = Application::GetInstance();
+
+	//const VECTOR& windowCenterPos = app.GetWindowCenterPos();
+	VECTOR windowCenterPos = app.GetWindowCenterPos();
+	VECTOR worldCenterPos = ConvScreenPosToWorldPos(windowCenterPos);
+	scale_ = MAP_SCALE_GAME_START;
 }
 
 void Map::DrawGrid(void)
@@ -69,7 +74,10 @@ void Map::DrawGrid(void)
 	Application& app = Application::GetInstance();
 
 	//マップの中央位置を中心としてグリッドを生成する(後々、スタート位置をマップ中央から以外にする可能性もあるので注意。あくまで全体マップの中心をグリッドの中心とする)
-	const VECTOR& worldCenterPos = ConvScreenPosToWorldPos(app.GetWindowCenterPos());
+	//const VECTOR& worldCenterPos = ConvScreenPosToWorldPos(app.GetWindowCenterPos());
+	//const VECTOR& windowCenterPos = app.GetWindowCenterPos();
+	VECTOR windowCenterPos = app.GetWindowCenterPos();
+	VECTOR worldCenterPos = ConvScreenPosToWorldPos(windowCenterPos);
 
 	//各方向の始点(中心から半分＊グリッドサイズを引く)
 	const float startX = worldCenterPos.x - static_cast<float>(halfGridX * GRIT_SIZE);
