@@ -22,9 +22,14 @@ public:
     void Draw(void)override;
     void Release(void)override;
 
+	void SetIsPlaceable(const bool _isPlaceable) { isPlaceable_ = _isPlaceable; }
+	const bool IsPlaceable(void)const { return isPlaceable_; }
+
 private:
     void DoLoad(void)override;
     void DoInit(void)override;
     void DoUpdate(void)override;
+
+	bool isPlaceable_;	//設置可能かどうか
 };
 

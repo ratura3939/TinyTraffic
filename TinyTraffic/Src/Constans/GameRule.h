@@ -14,10 +14,15 @@ static constexpr float ZOOM_OUT_MILESTONE_MAX = 1.0f;	//ズームアウトのマ
 static constexpr int TILE_NUM_X = 36;	//タイルの横の数
 static constexpr int TILE_NUM_Y = 20;	//タイルの縦の数
 
+static constexpr int CAN_PLACE_TILE_NUM_X_GAME_START = 14;	//タイルの横の数(ゲーム開始時)
+static constexpr int CAN_PLACE_TILE_NUM_Y_GAME_START = 8;	//タイルの縦の数(ゲーム開始時)
+
+static constexpr int  INCREMENT_PLACE_RANGE_X = 2;	//タイルの横の数の増加量(片幅分)
+static constexpr int  INCREMENT_PLACE_RANGE_Y = 1;	//タイルの縦の数の増加量(片幅分)
+
 static constexpr float MAP_SCALE_GAME_START = 4.0f;		//マップの初期拡大率
 static constexpr float MAP_SCALE_GAME_END = 1.7f;		//マップの最終拡大率
 
 static constexpr float GRIT_SIZE = 16.0f * MAP_SCALE_GAME_END;	//グリッドの大きさ(大きさは最終拡大率基準)
-
 
 #pragma endregion
