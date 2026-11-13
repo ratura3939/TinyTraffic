@@ -57,6 +57,7 @@ void Map::DoInit(void)
 
 void Map::DoUpdate(void)
 {
+	TileManager::GetInstance().Update();
 }
 
 void Map::DrawGrid(void)

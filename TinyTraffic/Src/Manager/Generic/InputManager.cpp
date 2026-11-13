@@ -131,6 +131,8 @@ void InputManager::ResetInput(void)
 
 	//ポーズ
 	inputTable_[INPUT_COMMAND::PAUSE] = { { PERIPHERAL_TYPE::KEYBOARD,KEY_INPUT_TAB },{ PERIPHERAL_TYPE::GAMEPAD,PAD_INPUT_R } };	//スタート
+
+	inputTable_[INPUT_COMMAND::DEBUG_COMMAND_1] = { { PERIPHERAL_TYPE::KEYBOARD,KEY_INPUT_T },{ PERIPHERAL_TYPE::GAMEPAD,PAD_INPUT_R } };	//スタート
 }
 
 void InputManager::AnalogInputFuncInit(void)

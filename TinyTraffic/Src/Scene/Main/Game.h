@@ -1,8 +1,9 @@
-#pragma once
+﻿#pragma once
 #include<memory>
 #include "../SceneBase.h"
 
 class Map;
+class PlayerAction;
 
 class Game :
     public SceneBase
@@ -25,7 +26,8 @@ private:
 
 	void DrawDebug(void);	//デバッグ描画
 
-	std::unique_ptr<Map> map_;
+	std::unique_ptr<Map> map_;	//マップ
+	std::unique_ptr<PlayerAction> playerAction_;	//プレイヤーの操作
 	bool isZoomOut_;	//ズームアウト中かどうか
 	float zoomOutProgress_;	//ズームアウトの進行度(0.0f～1.0f)
 	float lastZoomOutMilestone_;	//最後にズームアウトしたマイルストーン

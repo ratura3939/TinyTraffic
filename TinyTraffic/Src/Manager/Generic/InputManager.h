@@ -30,6 +30,8 @@ public:
 		,ENTER			//決定
 		,CANCEL			//キャンセル
 		,PAUSE			//ポーズ
+
+		,DEBUG_COMMAND_1 //デバッグ用コマンド
 		,MAX
 	};
 

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #pragma region Constans->GameCamera
 static constexpr float CAMERA_POSITION_Z_GAME_START = -230.0f;	//カメラのZ座標(ゲーム開始時)

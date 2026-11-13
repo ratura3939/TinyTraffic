@@ -5,7 +5,7 @@
 
 namespace {
 	const int CURSOR_RADIUS = 10;	//カーソルの半径
-	const int CURSOR_COLOR = 0xff0000;	//カーソルの色
+	const int CURSOR_COLOR = 0x008b8b;	//カーソルの色
 }
 
 Cursor::Cursor(const float& _speed)

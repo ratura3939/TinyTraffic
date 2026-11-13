@@ -8,8 +8,11 @@ namespace {
 
 Tile::Tile(const VECTOR& _position)
 	:isPlaceable_(false)
+	,tileType_(TILE_TYPE::MAX)
 {
 	pos_ = _position;
+
+	color_ = NOT_PLACEABLE_COLOR;
 }
 
 Tile::~Tile(void)
@@ -18,8 +21,7 @@ Tile::~Tile(void)
 
 void Tile::Draw(void)
 {
-	int useColor = isPlaceable_ ? CENTER_COLOR : NOT_PLACEABLE_COLOR;
-	DrawSphere3D(pos_, 4.0f, 8, useColor, useColor, false);
+	DrawSphere3D(pos_, 4.0f, 8, color_, color_, false);
 }
 
 void Tile::Release(void)

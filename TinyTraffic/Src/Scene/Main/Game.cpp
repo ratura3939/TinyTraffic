@@ -1,10 +1,12 @@
-#include "../../pch.h"
+﻿#include "../../pch.h"
 #include"../../Manager/Generic/ResourceManager.h"
 #include"../../Manager/Generic/InputManager.h"
 #include"../../Manager/Generic/SceneManager.h"
 #include"../../Manager/Generic/Camera.h"
 #include"../../Manager/GameSystem/CursorManager.h"
+#include"../../Manager/GameSystem/TileManager.h"
 #include"../../Object/Map/Map.h"
+#include"../../Object/Player/PlayerAction.h"
 #include"../../Constans/GameRule.h"
 #include "Game.h"
 
@@ -14,6 +16,7 @@ namespace {
 
 Game::Game(void)
 	:map_(nullptr)
+	,playerAction_(nullptr)
 	,isZoomOut_(false)
 	,zoomOutProgress_(0.0f)
 	,lastZoomOutMilestone_(0.0f)
@@ -38,6 +41,9 @@ void Game::Init(void)
 	map_ = std::make_unique<Map>(resM.Load(ResourceManager::SRC::TEST_MAP_1_IMG).handleId_);
 	map_->Load();
 	map_->Init();
+
+	playerAction_ = std::make_unique<PlayerAction>();
+	playerAction_->Init();
 }
 
 void Game::InitSound(void)
@@ -52,6 +58,8 @@ void Game::Update(void)
 {
 	map_->Update();
 
+	playerAction_->Update();
+
 	//カメラのズームアウト
 	if (isZoomOut_) {
 		ZoomOutCamera();
@@ -59,13 +67,14 @@ void Game::Update(void)
 
 
 	InputManager& inputM = InputManager::GetInstance();
-	if (inputM.IsPressed(InputManager::INPUT_COMMAND::ENTER)) {
+	if (inputM.IsPressed(InputManager::INPUT_COMMAND::DEBUG_COMMAND_1)) {
 		isZoomOut_ = true;
 
 		if (zoomOutProgress_ >= ZOOM_OUT_MILESTONE_MAX) {
 			isZoomOut_ = false;
 		}
 	}
+
 }
 
 void Game::Draw(void)
@@ -119,10 +128,16 @@ void Game::ZoomOutCamera(void)
 
 void Game::DrawDebug(void)
 {
+	const VECTOR cursorPos = CursorManager::GetInstance().GetPos();
 
-	DrawString(0, 0, L"GameScene", 0xffffff);
+	TileManager& tileM = TileManager::GetInstance();
+	const VECTOR worldPos = tileM.GetCursorPosAtWorld();
 
-	auto& cameraPos = SceneManager::GetInstance().GetCamera().GetPos();
+	const int tileX = tileM.GetCursorTileIdxX();
+	const int tileY = tileM.GetCursorTileIdxY();
 
-	DrawFormatString(0, 0, 0xff000, L"CameraPos:%.2f,%.2f,%.2f", cameraPos.x, cameraPos.y, cameraPos.z);
+	DrawFormatString(10, 10, 0x000000,
+		L"CursorPos: (%.2f,%.2f)\nWorldPosAtDraw: (%.2f,%.2f)\nTILE: (%d, %d)",
+		cursorPos.x, cursorPos.y,
+		worldPos.x, worldPos.y, tileX, tileY);
 }

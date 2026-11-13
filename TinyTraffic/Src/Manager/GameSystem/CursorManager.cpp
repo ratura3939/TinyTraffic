@@ -1,4 +1,6 @@
 ﻿#include "../../pch.h"
+#include"../Generic/InputManager.h"
+#include"TileManager.h"
 #include"../../Object/Cursor/Cursor.h"
 #include "CursorManager.h"
 
