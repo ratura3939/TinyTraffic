@@ -4,6 +4,7 @@
 #include"../../Object/Map/Tile/TileState.h"
 #include"../Generic/SceneManager.h"
 #include"../Generic/Camera.h"
+#include"Navigation/NavigationSystem.h"
 #include "TileManager.h"
 
 //デバッグ用のインクルード
@@ -85,8 +86,9 @@ void TileManager::ChangeTileToRoadFromClick(const VECTOR& _worldPos)
 	if(clickedTile.GetTileType()==TILE_TYPE::FREE&&clickedTile.IsPlaceable())
 	{
 		//ナビゲーションシステムに変更リクエスト
+		NavigationSystem::GetInstance().RequestChangeTileToRoad(cursorTileIdxX_, cursorTileIdxY_);
 
-		SetTileState(cursorTileIdxX_, cursorTileIdxY_, TILE_TYPE::ROAD);
+		//SetTileState(cursorTileIdxX_, cursorTileIdxY_, TILE_TYPE::ROAD);
 	}
 }
 
