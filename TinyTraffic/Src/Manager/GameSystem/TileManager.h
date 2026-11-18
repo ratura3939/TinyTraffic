@@ -20,6 +20,7 @@ public:
     void Draw(void);
 
 	void ChangeTileToRoadFromClick(const VECTOR& _worldPos);	//クリックした位置のタイルを道路に変更する
+	void ChangeTileToFreeFromClick(const VECTOR& _worldPos);	//クリックした位置のタイルをフリーに変更する
 	void SetTileState(const int x, const int y, const TILE_TYPE state);
 
 	const float GetTileStartPosX(void)const { return tileStartPosX_; }

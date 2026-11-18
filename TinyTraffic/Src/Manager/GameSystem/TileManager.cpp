@@ -85,10 +85,38 @@ void TileManager::ChangeTileToRoadFromClick(const VECTOR& _worldPos)
 
 	if(clickedTile.GetTileType()==TILE_TYPE::FREE&&clickedTile.IsPlaceable())
 	{
-		//ナビゲーションシステムに変更リクエスト
-		NavigationSystem::GetInstance().RequestChangeTileToRoad(cursorTileIdxX_, cursorTileIdxY_);
+		NavigationSystem& navigation = NavigationSystem::GetInstance();
 
-		//SetTileState(cursorTileIdxX_, cursorTileIdxY_, TILE_TYPE::ROAD);
+		//ナビゲーションシステムに変更リクエスト
+		const bool isRequest= navigation.RequestChangeTile(cursorTileIdxX_, cursorTileIdxY_);
+
+		if (isRequest)
+		{
+			//タイル設定(今回と前回のリクエスト位置)
+			const int prevRequestIdxX = navigation.GetPrevRequestChangeIdxX();
+			const int prevRequestIdxY = navigation.GetPrevRequestChangeIdxY();
+
+			SetTileState(cursorTileIdxX_, cursorTileIdxY_, TILE_TYPE::ROAD);
+			SetTileState(prevRequestIdxX, prevRequestIdxY, TILE_TYPE::ROAD);
+
+			//繋がった情報の更新
+			navigation.SetConnectionInfo(true, prevRequestIdxX, prevRequestIdxY, cursorTileIdxX_, cursorTileIdxY_);
+
+			//更新が終わったからprevの位置更新をしなければならない。改良しろ！！！
+		}
+	}
+}
+
+void TileManager::ChangeTileToFreeFromClick(const VECTOR& _worldPos)
+{
+	Tile& clickedTile = *tile_[cursorTileIdxX_][cursorTileIdxY_];
+
+	NavigationSystem& navigation = NavigationSystem::GetInstance();
+
+	if (clickedTile.GetTileType() == TILE_TYPE::ROAD && clickedTile.IsPlaceable())
+	{
+		SetTileState(cursorTileIdxX_, cursorTileIdxY_, TILE_TYPE::FREE);
+		navigation.RemoveConnectionInfo(cursorTileIdxX_, cursorTileIdxY_);
 	}
 }
 

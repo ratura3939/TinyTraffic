@@ -24,4 +24,9 @@ void PlayerAction::Update(void)
 	if (inputM.IsPressed(InputManager::INPUT_COMMAND::ENTER)) {
 		TileManager::GetInstance().ChangeTileToRoadFromClick(ConvScreenPosToWorldPos(CursorManager::GetInstance().GetPos()));
 	}
+
+	//押されているとき
+	if (inputM.IsPressed(InputManager::INPUT_COMMAND::CANCEL)) {
+		TileManager::GetInstance().ChangeTileToFreeFromClick(ConvScreenPosToWorldPos(CursorManager::GetInstance().GetPos()));
+	}
 }
